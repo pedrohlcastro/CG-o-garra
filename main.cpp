@@ -1,9 +1,9 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-#ifdef LINUX
-    #include <SOIL/SOIL.h>
-#elif defined WIN32
+#ifdef WIN32
     #include <SOIL.h>
+#else
+    #include <SOIL/SOIL.h>
 #endif
 #include <bits/stdc++.h>
 #include "skybox.h"
@@ -25,6 +25,7 @@ void Inicializa(){
     glLoadIdentity();
     glTranslatef (0.0, 0.0, -5.0);
     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+
 }
 
 void Desenha(){
@@ -145,7 +146,7 @@ int main(int argc, char** argv){
     glutInitWindowSize (500, 500);
     glutInitWindowPosition (100, 100);
     glutCreateWindow ("O GARRA");
-
+    setupTexturasSkybox();
     glutReshapeFunc(Redimensiona);
     Inicializa();
     glutDisplayFunc(Desenha);

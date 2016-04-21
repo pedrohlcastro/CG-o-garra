@@ -1,10 +1,10 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-#ifdef LINUX
-    #include <SOIL/SOIL.h>
-#elif defined WIN32
+#ifdef WIN32
     #include <SOIL.h>
+#else
+    #include <SOIL/SOIL.h>
 #endif
 
 #include <bits/stdc++.h>

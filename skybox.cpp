@@ -1,109 +1,156 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-#ifdef LINUX
-    #include <SOIL/SOIL.h>
-#elif defined WIN32
+#ifdef WIN32
     #include <SOIL.h>
+#else
+    #include <SOIL/SOIL.h>
 #endif
 #include <bits/stdc++.h>
 #include "skybox.h"
 #include "estruturas_basicas.h"
 
-/*void setupTexturasSkybox(){
-    *imgFundo = SOIL_load_OGL_texture(
-        "img/tela_fundo.png",
+using namespace std;
+
+enum intTextura{FUNDO=0,LADOS,CHAO,TETO};
+GLint intSkybox[4];
+
+void setupTexturasSkybox(){
+    intSkybox[FUNDO] = SOIL_load_OGL_texture(
+        "../img/fundo.png",
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         SOIL_FLAG_INVERT_Y
     );
-}*/
+    if (intSkybox[FUNDO] == 0 ) {
+
+        printf("Erro carregando textura: '%s'\n", SOIL_last_result());
+    }
+
+    intSkybox[LADOS] = SOIL_load_OGL_texture(
+        "../img/lados.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_INVERT_Y
+    );
+    if (intSkybox[LADOS] == 0 ) {
+        printf("Erro carregando textura: '%s'\n", SOIL_last_result());
+    }
+    intSkybox[CHAO] = SOIL_load_OGL_texture(
+        "../img/chao.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_INVERT_Y
+    );
+    if (intSkybox[CHAO] == 0 ) {
+        printf("Erro carregando textura: '%s'\n", SOIL_last_result());
+    }
+    intSkybox[TETO] = SOIL_load_OGL_texture(
+        "../img/teto.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_INVERT_Y
+    );
+    if (intSkybox[TETO] == 0 ) {
+        printf("Erro carregando textura: '%s'\n", SOIL_last_result());
+    }
+}
 
 void desenhaSkybox(float fltSize){
     bool blnTextureEnabled = glIsEnabled(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
     //glEnable(GL_TEXTURE_2D);
-    //glBindTexture(GL_TEXTURE_2D,skybox[SKY_BACK]);
+    //glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
     glPushMatrix();
         glBegin(GL_QUADS);
             //back face
-            glColor4f(0,0,1,1);
-            // glTexCoord2f(0,0);      
+            glColor4f(1,1,1,1);
+            //glTexCoord2f(0,0);      
             glVertex3f(fltSize/2,fltSize/2,fltSize/2);       
-            // glTexCoord2f(1,0);
+            //glTexCoord2f(1,0);
             glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-            // glTexCoord2f(1,1);
+            //glTexCoord2f(1,1);
             glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
-            // glTexCoord2f(0,1);
+            //glTexCoord2f(0,1);
             glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
         glEnd();
+        //glDisable(GL_TEXTURE_2D);
 
-        // glBindTexture(GL_TEXTURE_2D,skybox[SKY_LEFT]);
+        //glEnable(GL_TEXTURE_2D);
+        //glBindTexture(GL_TEXTURE_2D,intSkybox[LADOS]);
         glBegin(GL_QUADS);
             //left face
-            glColor4f(1,0.5,1,1);
-            // glTexCoord2f(0,0);
+            glColor4f(1,1,1,1);
+            //glTexCoord2f(0,0);
             glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-            // glTexCoord2f(1,0);
+            //glTexCoord2f(1,0);
             glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
-            // glTexCoord2f(1,1);
+            //glTexCoord2f(1,1);
             glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
-            // glTexCoord2f(0,1);
+            //glTexCoord2f(0,1);
             glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
         glEnd();
+        //glDisable(GL_TEXTURE_2D);
 
-        // glBindTexture(GL_TEXTURE_2D,skybox[SKY_FRONT]);
+        //glEnable(GL_TEXTURE_2D);
+        //glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
         glBegin(GL_QUADS);
             //front face
-            glColor4f(0.5,0,1,1);
-            // glTexCoord2f(1,0);
+            glColor4f(1,1,1,1);
+            //glTexCoord2f(1,0);
             glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
-            // glTexCoord2f(0,0);
+            //glTexCoord2f(0,0);
             glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
-            // glTexCoord2f(0,1);
+            //glTexCoord2f(0,1);
             glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
-            // glTexCoord2f(1,1);
+            //glTexCoord2f(1,1);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
+        //glDisable(GL_TEXTURE_2D);
 
-        // glBindTexture(GL_TEXTURE_2D,skybox[SKY_RIGHT]);
+        //glEnable(GL_TEXTURE_2D);
+        //glBindTexture(GL_TEXTURE_2D,intSkybox[LADOS]);
         glBegin(GL_QUADS);
             //right face
-            glColor4f(0,0.5,1,1);
-            // glTexCoord2f(0,0);
+            glColor4f(1,1,1,1);
+            //glTexCoord2f(0,0);
             glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
-            // glTexCoord2f(1,0);
+            //glTexCoord2f(1,0);
             glVertex3f(fltSize/2,fltSize/2,fltSize/2);
-            // glTexCoord2f(1,1);
+            //glTexCoord2f(1,1);
             glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
-            // glTexCoord2f(0,1);
+            //glTexCoord2f(0,1);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
+        //glDisable(GL_TEXTURE_2D);
 
-        // glBindTexture(GL_TEXTURE_2D,skybox[SKY_TOP]);
-        glBegin(GL_QUADS);                      //top face
-            glColor4f(0,1,1,1);
-            // glTexCoord2f(1,0);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,intSkybox[TETO]);
+        glBegin(GL_QUADS);                 
+            glColor4f(1,1,1,1);
+            glTexCoord2f(1,0);
             glVertex3f(fltSize/2,fltSize/2,fltSize/2);
-            // glTexCoord2f(0,0);
+            glTexCoord2f(0,0);
             glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-            // glTexCoord2f(0,1);
+            glTexCoord2f(0,1);
             glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
-            // glTexCoord2f(1,1);
+            glTexCoord2f(1,1);
             glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
 
-        // glBindTexture(GL_TEXTURE_2D,skybox[SKY_BOTTOM]);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,intSkybox[CHAO]);
         glBegin(GL_QUADS);
             //bottom face
-            glColor4f(1,0,1,1);
-            // glTexCoord2f(1,1);
+            glColor4f(1,1,1,1);
+            glTexCoord2f(1,1);
             glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
-            // glTexCoord2f(0,1);
+            glTexCoord2f(0,1);
             glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
-            // glTexCoord2f(0,0);
+            glTexCoord2f(0,0);
             glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
-            // glTexCoord2f(1,0);
+            glTexCoord2f(1,0);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
     glPopMatrix();
