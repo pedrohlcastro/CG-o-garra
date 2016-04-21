@@ -43,9 +43,7 @@
 			<Add option="-Wall" />
 			<Add option="-g" />
 		</Compiler>
-		<Unit filename="../main.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="../main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
