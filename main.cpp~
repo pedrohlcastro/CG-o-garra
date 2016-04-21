@@ -49,6 +49,10 @@ void Redimensiona(int w, int h){
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
     gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 20.0);
+<<<<<<< HEAD
+=======
+    
+>>>>>>> master
 }
 
 void Teclado(unsigned char key, int x, int y){

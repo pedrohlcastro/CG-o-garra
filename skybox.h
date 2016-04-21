@@ -1,0 +1,1 @@
+void desenhaSkybox(float size);
