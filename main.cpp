@@ -70,21 +70,25 @@ void Teclado(unsigned char key, int x, int y){
             break;
 
         case 'a'://camera vira para direita
-            crdCamera.fltX +=0.3;
-            cout << crdCamera.fltX << endl;
-            glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
-            glTranslatef (0.0, 0.0, -5.0);
-            gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+            if(crdCamera.fltX<=2.4){
+                crdCamera.fltX +=0.3;
+                cout << crdCamera.fltX << endl;
+                glMatrixMode(GL_MODELVIEW);
+                glLoadIdentity();
+                glTranslatef (0.0, 0.0, -5.0);
+                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+            }
             break;
 
         case 'd'://camera vira para esquerda
-            crdCamera.fltX -= 0.3;
-            cout << crdCamera.fltX << endl;
-            glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
-            glTranslatef (0.0, 0.0, -5.0);
-            gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+            if(crdCamera.fltX>=-4.8){
+                crdCamera.fltX -= 0.3;
+                cout << crdCamera.fltX << endl;
+                glMatrixMode(GL_MODELVIEW);
+                glLoadIdentity();
+                glTranslatef (0.0, 0.0, -5.0);
+                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+            }
             break;
 
         case 'x'://garra fecha
