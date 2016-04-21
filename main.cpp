@@ -1,4 +1,6 @@
+#include <GL/glew.h>
 #include <GL/freeglut.h>
+#include <SOIL/SOIL.h>
 
 int anguloOmbro = 270, anguloCutuvelo = 0;
 
@@ -8,25 +10,24 @@ void Inicializa(){
 }
 
 void Desenha(){
-    glClear (GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable (GL_BLEND);
+    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glColor4f(1,1,1,1);
+    glEnable(GL_DEPTH_TEST);
+
+    // caixa da Garra...
     glPushMatrix();
-    glTranslatef (-1.0, 0.0, 0.0);
-    glRotatef ((GLfloat) anguloOmbro, 0.0, 0.0, 1.0);
-    glTranslatef (1.0, 0.0, 0.0);
-    glPushMatrix();
-    glScalef (2.0, 0.4, 1.0);
-    glutWireCube (1.0);
+        glTranslated(0,0,0);
+        glutWireCube(5);
     glPopMatrix();
 
-    glTranslatef (1.0, 0.0, 0.0);
-    glRotatef ((GLfloat) anguloCutuvelo, 0.0, 0.0, 1.0);
-    glTranslatef (1.0, 0.0, 0.0);
+    //objeto dentro da garra
     glPushMatrix();
-    glScalef (2.0, 0.4, 1.0);
-    glutWireCube (1.0);
+        glTranslated(0,-2,0);
+        glutSolidSphere(0.5,100,100);
     glPopMatrix();
 
-    glPopMatrix();
     glutSwapBuffers();
 }
 
@@ -34,10 +35,11 @@ void Redimensiona(int w, int h){
     glViewport (0, 0, (GLsizei) w, (GLsizei) h);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-    gluPerspective(65.0, (GLfloat) w/(GLfloat) h, 1.0, 20.0);
+    gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 20.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef (0.0, 0.0, -5.0);
+    gluLookAt(0,1,3,0,0,0,0,1,0);
 }
 
 void Teclado(unsigned char key, int x, int y){
@@ -74,7 +76,7 @@ void MovimentaBraco(int key, int x, int y){
 
 int main(int argc, char** argv){
     glutInit(&argc, argv);
-    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize (500, 500);
     glutInitWindowPosition (100, 100);
     glutCreateWindow ("Braco do Robo");

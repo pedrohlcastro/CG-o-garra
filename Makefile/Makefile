@@ -1,9 +1,9 @@
-CC=gcc
-OPCOES_COMPILADOR=-I. -lglut -lGLU -lGLEW -lGL
+CC=g++
+OPCOES_COMPILADOR=-I. -lSOIL -lGL -lGLU -lglut -lGLEW -lm
 TODOS_ARQUIVOS_PONTOH =
 TODOS_ARQUIVOS_OBJ = main.o
 
-%.o: ../%.c $(TODOS_ARQUIVOS_PONTOH)
+%.o: ../%.cpp $(TODOS_ARQUIVOS_PONTOH)
 	$(CC) -o $@ -c $< $(OPCOES_COMPILADOR)
 
 all: $(TODOS_ARQUIVOS_OBJ)
