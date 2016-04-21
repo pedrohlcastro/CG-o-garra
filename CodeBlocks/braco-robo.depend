@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1461269224 source:c:\tp\tp2\trunk\main.cpp
+	<GL/glew.h>
+	<GL/freeglut.h>
+	<SOIL.h>
+	<bits/stdc++.h>
+	"skybox.h"
+	"estruturas_basicas.h"
+	"garra.h"
+
+1461266930 c:\tp\tp2\trunk\skybox.h
+
+1461268647 c:\tp\tp2\trunk\estruturas_basicas.h
+
+1461266919 source:c:\tp\tp2\trunk\skybox.cpp
+	<GL/glew.h>
+	<GL/freeglut.h>
+	<SOIL.h>
+	"skybox.h"
+	"estruturas_basicas.h"
+
+1461269202 source:c:\tp\tp2\trunk\garra.cpp
+	<GL/glew.h>
+	<GL/freeglut.h>
+	<SOIL.h>
+	"estruturas_basicas.h"
+
+1461267846 c:\tp\tp2\trunk\garra.h
+
