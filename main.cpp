@@ -1,7 +1,10 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-//#include <SOIL/SOIL.h>
-#include <SOIL.h>
+#ifdef LINUX
+    #include <SOIL/SOIL.h>
+#elif defined WIN32
+    #include <SOIL.h>
+#endif
 #include <bits/stdc++.h>
 #include "skybox.h"
 #include "estruturas_basicas.h"
@@ -30,6 +33,7 @@ void Desenha(){
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glColor4f(1,1,1,1);
     glEnable(GL_DEPTH_TEST);
+
     desenhaSkybox(12);
     // caixa da Garra...
     glPushMatrix();
@@ -52,6 +56,10 @@ void Redimensiona(int w, int h){
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(60.0, (GLfloat) w/(GLfloat) h, 1.0, 20.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef (0.0, 0.0, -5.0);
+    gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
 }
 
 void Teclado(unsigned char key, int x, int y){
@@ -79,7 +87,7 @@ void Teclado(unsigned char key, int x, int y){
             gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
             break;
 
-        case 'x':
+        case 'x'://garra fecha
             if (grrGarra.intDireita < 30)
                 grrGarra.intDireita = (grrGarra.intDireita + 5) % 360;
             if (grrGarra.intEsquerda < 30)
@@ -90,7 +98,8 @@ void Teclado(unsigned char key, int x, int y){
                 grrGarra.intSuperior = (grrGarra.intSuperior + 5) % 360;
             glutPostRedisplay();
             break;
-        case 'z':
+
+        case 'z'://gara abre
             if (grrGarra.intDireita > 0)
                 grrGarra.intDireita = (grrGarra.intDireita - 5) % 360;
             if (grrGarra.intEsquerda > 0)
@@ -107,28 +116,18 @@ void Teclado(unsigned char key, int x, int y){
     }
 }
 
-void MovimentaBraco(int key, int x, int y){
-    //Movimenta ombro
+void MovimentaGarra(int key, int x, int y){
     if(key == GLUT_KEY_UP){
-        //anguloOmbro = (anguloOmbro + 5) % 360;
         crdGarra.fltZ++;
-        glutPostRedisplay();
     }
     if(key == GLUT_KEY_DOWN){
-        //anguloOmbro = (anguloOmbro - 5) % 360;
         crdGarra.fltZ--;
-        glutPostRedisplay();
     }
-    //Movimenta cutuvelo
     if(key == GLUT_KEY_RIGHT){
-        //anguloCutuvelo = (anguloCutuvelo + 5) % 360;
         crdGarra.fltX++;
-        glutPostRedisplay();
     }
     if(key == GLUT_KEY_LEFT){
-        //anguloCutuvelo = (anguloCutuvelo - 5) % 360;
         crdGarra.fltX--;
-        glutPostRedisplay();
     }
 }
 
@@ -141,14 +140,15 @@ int main(int argc, char** argv){
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize (500, 500);
     glutInitWindowPosition (100, 100);
-    glutCreateWindow ("Braco do Robo");
+    glutCreateWindow ("O GARRA");
 
-
-    glutDisplayFunc(Desenha);
     glutReshapeFunc(Redimensiona);
     Inicializa();
+    glutDisplayFunc(Desenha);
+    
+    
     glutKeyboardFunc(Teclado);
-    glutSpecialFunc(MovimentaBraco);
+    glutSpecialFunc(MovimentaGarra);
     glutIdleFunc(Update);
     glutMainLoop();
     return 0;

@@ -1,7 +1,13 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-//#include <SOIL/SOIL.h>
-#include <SOIL.h>
+
+#ifdef LINUX
+    #include <SOIL/SOIL.h>
+#elif defined WIN32
+    #include <SOIL.h>
+#endif
+
+#include <bits/stdc++.h>
 #include "estruturas_basicas.h"
 
 int anguloOmbro = 270, anguloSuporte = 0;

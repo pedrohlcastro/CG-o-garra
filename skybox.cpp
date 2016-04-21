@@ -1,7 +1,11 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-//#include <SOIL/SOIL.h>
-#include <SOIL.h>
+#ifdef LINUX
+    #include <SOIL/SOIL.h>
+#elif defined WIN32
+    #include <SOIL.h>
+#endif
+#include <bits/stdc++.h>
 #include "skybox.h"
 #include "estruturas_basicas.h"
 
@@ -24,9 +28,9 @@ void desenhaSkybox(float fltSize){
         glBegin(GL_QUADS);
             //back face
             glColor4f(0,0,1,1);
-            // glTexCoord2f(0,0);      //use the correct texture coordinate
-            glVertex3f(fltSize/2,fltSize/2,fltSize/2);       //and a vertex
-            // glTexCoord2f(1,0);      //and repeat it...
+            // glTexCoord2f(0,0);      
+            glVertex3f(fltSize/2,fltSize/2,fltSize/2);       
+            // glTexCoord2f(1,0);
             glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
             // glTexCoord2f(1,1);
             glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);

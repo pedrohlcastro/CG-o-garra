@@ -2,8 +2,8 @@ CC=g++
 OPCOES_COMPILADOR=-I. -lSOIL -lGL -lGLU -lglut -lGLEW -lm
 all:arquivos
 
-arquivos: main.o skybox.o
-	$(CC) main.o skybox.o -o executavel $(OPCOES_COMPILADOR)
+arquivos: main.o skybox.o garra.o
+	$(CC) main.o skybox.o garra.o -o executavel $(OPCOES_COMPILADOR)
 	@echo "\nCRIADO COM SUCESSO UTILIZE MAKE RUN PARA RODAR\n"
 
 main.o: ../main.cpp
@@ -11,6 +11,9 @@ main.o: ../main.cpp
 
 skybox.o: ../skybox.cpp
 	$(CC) -o skybox.o -c ../skybox.cpp $(OPCOES_COMPILADOR)
+
+garra.o: ../garra.cpp
+	$(CC) -o garra.o -c ../garra.cpp $(OPCOES_COMPILADOR)
 	
 run:
 	./executavel
