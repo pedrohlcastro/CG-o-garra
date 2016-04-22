@@ -10,6 +10,7 @@
 #include "estruturas_basicas.h"
 #include "garra.h"
 #include "desenho.h"
+#include "objetos_fundo.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ void Inicializa(){
     glLoadIdentity();
     glTranslatef (0.0, 0.0, -5.0);
     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+    setObjetosFundo(15,5);
 }
 
 void Desenha(){
@@ -41,13 +43,15 @@ void Desenha(){
     desenhaSkybox(12);
     //objeto dentro da garra
     glPushMatrix();
-        /*glTranslated(0,-2,0);
-        glutSolidSphere(0.5,100,100);*/
         desenhaGarra(grrGarra);
+        // glTranslated(2,-2,2);
+        // glutSolidCube(0.5);
+        desenhaObjetosFundo(10);
     glPopMatrix();
 
     desenhaMaquina(5,corMaquina);
 
+    
 
     // caixa da Garra...
     glPushMatrix();

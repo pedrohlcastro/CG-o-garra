@@ -21,7 +21,7 @@ void setupTexturasSkybox(){
         #ifdef WIN32
             "img/fundo.png",
         #else
-            "img/fundo.png",
+            "../img/fundo.png",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
