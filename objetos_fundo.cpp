@@ -5,7 +5,8 @@
 #else
     #include <SOIL/SOIL.h>
 #endif
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <iostream>
 #include "estruturas_basicas.h"
 #include "objetos_fundo.h"
 
@@ -13,47 +14,63 @@ using namespace std;
 
 objetosFundo objfVetorObjetos[1000];
 
-void setObjetosFundo(int intQtd,float fltAreaCaixaVidro){
-	float fltTamMax=(float)fltAreaCaixaVidro/intQtd;
+void setObjetosFundo(int intFase,float fltAreaCaixaVidro){
+	FILE * fileCordenadas;
+	int intTam;
 	srand(time(0));
-	int tmp=(int)fltAreaCaixaVidro;
-
-	for(int i=0;i<intQtd;i++){
-		objfVetorObjetos[i].crdObjetosFundo.fltX = fltTamMax+rand()%tmp;
-		if(objfVetorObjetos[i].crdObjetosFundo.fltX>(fltAreaCaixaVidro/2)){
-			objfVetorObjetos[i].crdObjetosFundo.fltX-=(fltAreaCaixaVidro-fltTamMax);
-		}
-		cout<<objfVetorObjetos[i].crdObjetosFundo.fltX<<",";
-		objfVetorObjetos[i].fltTamanhoObjeto = 0.5;
-
-		objfVetorObjetos[i].crdObjetosFundo.fltY = -2.5+objfVetorObjetos[i].fltTamanhoObjeto;
-		cout<<objfVetorObjetos[i].crdObjetosFundo.fltY<<",";
-
-
-		objfVetorObjetos[i].crdObjetosFundo.fltZ = fltTamMax+rand()%tmp;
-		if(objfVetorObjetos[i].crdObjetosFundo.fltZ>(fltAreaCaixaVidro/2)){
-			objfVetorObjetos[i].crdObjetosFundo.fltZ-=(fltAreaCaixaVidro-fltTamMax);
-		}
-		cout<<objfVetorObjetos[i].crdObjetosFundo.fltZ<<endl;
-
-
-		objfVetorObjetos[i].intTipo=CUBO;
+	float aux;
+	if(intFase==1){
+		#ifdef WIN32
+            fileCordenadas=fopen("cord_Obj/cordenadas1.txt","r");
+        #else
+            fileCordenadas=fopen("../cord_Obj/cordenadas1.txt","r");
+        #endif
 		
-		
+		if(fileCordenadas==NULL){
+			cout<<"ERRO ABRIR ARQUIVO"<<endl;
+		}	
+		fscanf(fileCordenadas,"%d",&intTam);
+		for(int i=0;i<intTam;i++){
+			fscanf(fileCordenadas,"%f",&aux);
+			objfVetorObjetos[i].crdObjetosFundo.fltX=aux;
+			fscanf(fileCordenadas,"%f",&aux);
+			objfVetorObjetos[i].crdObjetosFundo.fltY=aux;
+			fscanf(fileCordenadas,"%f",&aux);
+			objfVetorObjetos[i].crdObjetosFundo.fltZ=aux;
+			
+			int intTipoAux=rand()%4;
+			objfVetorObjetos[i].intTipo=CUBO;
+			objfVetorObjetos[i].fltTamanhoObjeto = 0.5;
+
+			//esferas flutuando... parte a implmentar...
+			/*if(intTipoAux%2==0){
+				objfVetorObjetos[i].intTipo=CUBO;
+				objfVetorObjetos[i].fltTamanhoObjeto = 0.5;
+			}
+			else{
+				objfVetorObjetos[i].intTipo=ESFERA;	
+				objfVetorObjetos[i].fltTamanhoObjeto = 0.30;
+			}*/
+		}
 	}
+	fclose(fileCordenadas);
 }
 
 void desenhaObjetosFundo(int intQtd){	
-	float x=1,y=1;
+	//cor provisoria
+	float intX=1,intY=1;
 	for(int i=0;i<intQtd;i++){
 		glPushMatrix();
-			glColor3f(x,y,1);
+			glColor3f(intX,intY,1);
         	glTranslatef(objfVetorObjetos[i].crdObjetosFundo.fltX,objfVetorObjetos[i].crdObjetosFundo.fltY,objfVetorObjetos[i].crdObjetosFundo.fltZ);
-        	glutSolidCube(objfVetorObjetos[i].fltTamanhoObjeto);
+        	if(objfVetorObjetos[i].intTipo==CUBO)
+        		glutSolidCube(objfVetorObjetos[i].fltTamanhoObjeto);
+        	if(objfVetorObjetos[i].intTipo==ESFERA)
+        		glutSolidSphere(objfVetorObjetos[i].fltTamanhoObjeto,100,100);
 		glPopMatrix();
 		if(i%2==0)
-			x-=0.2;
+			intX-=0.2;
 		else
-			y-=0.2;
+			intY-=0.2;
 	}
 }

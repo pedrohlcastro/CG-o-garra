@@ -31,7 +31,8 @@ void Inicializa(){
     glLoadIdentity();
     glTranslatef (0.0, 0.0, -5.0);
     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
-    setObjetosFundo(15,5);
+    //carrega objetos fundo... fase,tamaho_vidro
+    setObjetosFundo(1,5);
 }
 
 void Desenha(){
@@ -41,17 +42,17 @@ void Desenha(){
     glEnable(GL_DEPTH_TEST);
 
     desenhaSkybox(12);
+
     //objeto dentro da garra
     glPushMatrix();
         desenhaGarra(grrGarra);
-        // glTranslated(2,-2,2);
-        // glutSolidCube(0.5);
-        desenhaObjetosFundo(10);
+        //glTranslated(-1.33333,-2,2.33333);
+        //glutSolidCube(0.5);
+        desenhaObjetosFundo(15);
     glPopMatrix();
 
+    //maquina
     desenhaMaquina(5,corMaquina);
-
-    
 
     // caixa da Garra...
     glPushMatrix();
@@ -85,7 +86,6 @@ void Teclado(unsigned char key, int x, int y){
         case 'a'://camera vira para direita
             if(crdCamera.fltX<=2.4){
                 crdCamera.fltX +=0.3;
-                cout << crdCamera.fltX << endl;
                 glMatrixMode(GL_MODELVIEW);
                 glLoadIdentity();
                 glTranslatef (0.0, 0.0, -5.0);
@@ -96,7 +96,6 @@ void Teclado(unsigned char key, int x, int y){
         case 'd'://camera vira para esquerda
             if(crdCamera.fltX>=-4.8){
                 crdCamera.fltX -= 0.3;
-                cout << crdCamera.fltX << endl;
                 glMatrixMode(GL_MODELVIEW);
                 glLoadIdentity();
                 glTranslatef (0.0, 0.0, -5.0);

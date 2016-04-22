@@ -1,4 +1,4 @@
-enum tipoObjetoFundo{BOLA,CUBO};
+enum tipoObjetoFundo{ESFERA,CUBO};
 
 typedef struct objetosFundo{
 	struct Coordenadas crdObjetosFundo;
@@ -6,5 +6,5 @@ typedef struct objetosFundo{
 	float fltTamanhoObjeto;
 }objetosFundo;
 
-void setObjetosFundo(int intQtd,float fltAreaCaixaVidro);
+void setObjetosFundo(int intFase,float fltAreaCaixaVidro);
 void desenhaObjetosFundo(int intQtd);
