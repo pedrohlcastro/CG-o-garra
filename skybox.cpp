@@ -15,13 +15,14 @@ enum intTextura{FUNDO=0,LADOS,CHAO,TETO};
 GLint intSkybox[4];
 
 void setupTexturasSkybox(){
+
+
     intSkybox[FUNDO] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/fundo.png"
+            "img/fundo.png",
         #else
-            "../img/fundo.png",
+            "img/fundo.png",
         #endif
-        
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         SOIL_FLAG_INVERT_Y
@@ -33,7 +34,7 @@ void setupTexturasSkybox(){
 
     intSkybox[LADOS] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/lados.png"
+            "img/lados.png",
         #else
             "../img/lados.png",
         #endif
@@ -46,7 +47,7 @@ void setupTexturasSkybox(){
     }
     intSkybox[CHAO] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/chao.png"
+            "img/chao.png",
         #else
             "../img/chao.png",
         #endif
@@ -59,7 +60,7 @@ void setupTexturasSkybox(){
     }
     intSkybox[TETO] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/teto.png"
+            "img/teto.png",
         #else
             "../img/teto.png",
         #endif
@@ -82,8 +83,8 @@ void desenhaSkybox(float fltSize){
         glBegin(GL_QUADS);
             //back face
             glColor4f(1,1,1,1);
-            glTexCoord2f(0,0);      
-            glVertex3f(fltSize/2,fltSize/2,fltSize/2);       
+            glTexCoord2f(0,0);
+            glVertex3f(fltSize/2,fltSize/2,fltSize/2);
             glTexCoord2f(1,0);
             glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
             glTexCoord2f(1,1);
@@ -143,7 +144,7 @@ void desenhaSkybox(float fltSize){
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,intSkybox[TETO]);
-        glBegin(GL_QUADS);                 
+        glBegin(GL_QUADS);
             glColor4f(1,1,1,1);
             glTexCoord2f(1,0);
             glVertex3f(fltSize/2,fltSize/2,fltSize/2);
@@ -176,5 +177,5 @@ void desenhaSkybox(float fltSize){
     //glEnable(GL_LIGHTING);
     glEnable(GL_DEPTH_TEST);
 
-    
+
 }

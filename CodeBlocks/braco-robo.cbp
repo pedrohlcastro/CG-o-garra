@@ -43,6 +43,8 @@
 			<Add option="-Wall" />
 			<Add option="-g" />
 		</Compiler>
+		<Unit filename="../desenho.cpp" />
+		<Unit filename="../desenho.h" />
 		<Unit filename="../estruturas_basicas.h" />
 		<Unit filename="../garra.cpp" />
 		<Unit filename="../garra.h" />
