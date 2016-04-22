@@ -6,5 +6,5 @@ typedef struct objetosFundo{
 	float fltTamanhoObjeto;
 }objetosFundo;
 
-void setObjetosFundo(int intFase,float fltAreaCaixaVidro);
+int setObjetosFundo(int intFase,float fltAreaCaixaVidro);
 void desenhaObjetosFundo(int intQtd);

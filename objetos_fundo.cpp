@@ -14,7 +14,7 @@ using namespace std;
 
 objetosFundo objfVetorObjetos[1000];
 
-void setObjetosFundo(int intFase,float fltAreaCaixaVidro){
+int setObjetosFundo(int intFase,float fltAreaCaixaVidro){
 	FILE * fileCordenadas;
 	int intTam;
 	srand(time(0));
@@ -54,6 +54,7 @@ void setObjetosFundo(int intFase,float fltAreaCaixaVidro){
 		}
 	}
 	fclose(fileCordenadas);
+	return intTam;
 }
 
 void desenhaObjetosFundo(int intQtd){	
@@ -73,4 +74,8 @@ void desenhaObjetosFundo(int intQtd){
 		else
 			intY-=0.2;
 	}
+}
+
+void testeColisao(Garra grrGarra){
+
 }

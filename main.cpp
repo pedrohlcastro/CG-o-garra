@@ -24,15 +24,18 @@ Cor corMaquina= {1, 0.5 , 0 , 1};
 int intTempo = 0;
 bool blnMovimentacaoHabilidata = true;
 
+int intQtdObjetosFundo;
+
 void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
-    glShadeModel (GL_FLAT);
+    glShadeModel(GL_SMOOTH);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef (0.0, 0.0, -5.0);
     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
-    //carrega objetos fundo... fase,tamaho_vidro
-    setObjetosFundo(1,5);
+
+    //carrega objetos fundo...
+    intQtdObjetosFundo = setObjetosFundo(1,5);
 }
 
 void Desenha(){
@@ -46,9 +49,7 @@ void Desenha(){
     //objeto dentro da garra
     glPushMatrix();
         desenhaGarra(grrGarra);
-        //glTranslated(-1.33333,-2,2.33333);
-        //glutSolidCube(0.5);
-        desenhaObjetosFundo(15);
+        desenhaObjetosFundo(intQtdObjetosFundo);
     glPopMatrix();
 
     //maquina
@@ -59,8 +60,6 @@ void Desenha(){
         glTranslated(0,0,0);
         desenhaCuboCustomizado(5,corMaquinaVidro);
     glPopMatrix();
-
-
 
     glutSwapBuffers();
 }
@@ -157,6 +156,8 @@ void MovimentaGarra(int key, int x, int y){
 
 void Update(){
     glutPostRedisplay();
+    //testeColisao(grrGarra);
+    //cout<<grrGarra.crdGarra.fltX<<" "<<grrGarra.crdGarra.fltY<<grrGarra.crdGarra.fltZ<<endl;
 }
 
 void Tempo(int value){
