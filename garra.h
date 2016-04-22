@@ -1,4 +1,4 @@
-void desenhaGarra(Coordenadas, Garra);
+void desenhaGarra(Garra);
 void IniciarMovimentacaoAutomatico();
 bool HabilitarMovimento();
-Coordenadas MovimentaGarra(Coordenadas, Garra);
+Garra MovimentaGarra(Garra);

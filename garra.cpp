@@ -24,12 +24,12 @@ bool blnMovimentoEixoX = false;
 bool blnMovimentando = false;
 bool blnFechar = false;
 
-void desenhaGarra(Coordenadas crdGarra, Garra grrGarra){
+void desenhaGarra(Garra grrGarra){
     //glClear (GL_COLOR_BUFFER_BIT);
     //Garra
     glColor3f(1.0,1.0,1.0);
     glPushMatrix();
-        glTranslatef (crdGarra.fltX, crdGarra.fltY, crdGarra.fltZ);
+        glTranslatef (grrGarra.crdGarra.fltX, grrGarra.crdGarra.fltY, grrGarra.crdGarra.fltZ);
         glRotatef ((GLfloat) anguloOmbro, 0.0, 0.0, 1.0);
         glRotatef ((GLfloat) anguloOmbro, 0.5, 0.0, 0.0);
         glPushMatrix();
@@ -144,7 +144,7 @@ void desenhaGarra(Coordenadas crdGarra, Garra grrGarra){
 }
 
 bool HabilitarMovimento(){
-    if(blnDescer && blnSubir && blnMovimentoEixoZ && blnMovimentoEixoX && blnFechar){
+    if(blnDescer && blnSubir && blnMovimentoEixoZ && blnMovimentoEixoX){
         blnMovimentando = false;
         blnDescer = false;
         blnSubir = false;
@@ -166,12 +166,13 @@ void IniciarMovimentacaoAutomatico(){
     blnFechar = false;
 }
 
-Coordenadas MovimentaGarra(Coordenadas crdGarra, Garra grrGarra){
+
+Garra MovimentaGarra(Garra grrGarra){
     blnDescer = true;
     blnSubir = true;
-    if(crdGarra.fltX == -2)
+    if(grrGarra.crdGarra.fltX == -2)
         blnMovimentoEixoX = true;
-    if(crdGarra.fltZ == -2)
+    if(grrGarra.crdGarra.fltZ == -2)
         blnMovimentoEixoZ = true;
     if (grrGarra.intDireita == 30)
         blnFechar = true;
@@ -183,8 +184,8 @@ Coordenadas MovimentaGarra(Coordenadas crdGarra, Garra grrGarra){
         grrGarra.intSuperior = (grrGarra.intSuperior + 5) % 360;
     }
     else*/ if(!blnMovimentoEixoX)
-        crdGarra.fltX--;
+        grrGarra.crdGarra.fltX--;
     else if(!blnMovimentoEixoZ)
-        crdGarra.fltZ--;
-    return crdGarra;
+        grrGarra.crdGarra.fltZ--;
+    return grrGarra;
 }

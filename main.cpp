@@ -14,10 +14,9 @@
 using namespace std;
 
 Coordenadas crdCamera = {0, 1, 3};
-Coordenadas crdGarra = {-2.0, 2.0, -2.0};
 Coordenadas crdTamanhoMinimoCubo = {-2, -2, -2};
 Coordenadas crdTamanhoMaximoCubo = {2, 2, 2};
-Garra grrGarra = {0, 0, 0 ,0};
+Garra grrGarra = {0, 0, 0 ,0, {-2.0, 2.0, -2.0}};
 Cor corMaquinaVidro = {1, 1, 1, 0.3};
 Cor corMaquina= {1, 0.5 , 0 , 1};
 
@@ -44,7 +43,7 @@ void Desenha(){
     glPushMatrix();
         /*glTranslated(0,-2,0);
         glutSolidSphere(0.5,100,100);*/
-        desenhaGarra(crdGarra, grrGarra);
+        desenhaGarra(grrGarra);
     glPopMatrix();
 
     desenhaMaquina(5,corMaquina);
@@ -56,7 +55,7 @@ void Desenha(){
         desenhaCuboCustomizado(5,corMaquinaVidro);
     glPopMatrix();
 
-    
+
 
     glutSwapBuffers();
 }
@@ -135,21 +134,21 @@ void Teclado(unsigned char key, int x, int y){
 }
 
 void MovimentaGarra(int key, int x, int y){
-    if(key == GLUT_KEY_UP){
-        if(crdGarra.fltZ < crdTamanhoMaximoCubo.fltZ && blnMovimentacaoHabilidata)
-            crdGarra.fltZ++;
-    }
     if(key == GLUT_KEY_DOWN){
-        if(crdGarra.fltZ > crdTamanhoMinimoCubo.fltZ && blnMovimentacaoHabilidata)
-            crdGarra.fltZ--;
+        if(grrGarra.crdGarra.fltZ < crdTamanhoMaximoCubo.fltZ && blnMovimentacaoHabilidata)
+            grrGarra.crdGarra.fltZ++;
+    }
+    if(key == GLUT_KEY_UP){
+        if(grrGarra.crdGarra.fltZ > crdTamanhoMinimoCubo.fltZ && blnMovimentacaoHabilidata)
+            grrGarra.crdGarra.fltZ--;
     }
     if(key == GLUT_KEY_RIGHT){
-        if(crdGarra.fltX < crdTamanhoMaximoCubo.fltX && blnMovimentacaoHabilidata)
-            crdGarra.fltX++;
+        if(grrGarra.crdGarra.fltX < crdTamanhoMaximoCubo.fltX && blnMovimentacaoHabilidata)
+            grrGarra.crdGarra.fltX++;
     }
     if(key == GLUT_KEY_LEFT){
-        if(crdGarra.fltX > crdTamanhoMinimoCubo.fltX && blnMovimentacaoHabilidata)
-            crdGarra.fltX--;
+        if(grrGarra.crdGarra.fltX > crdTamanhoMinimoCubo.fltX && blnMovimentacaoHabilidata)
+            grrGarra.crdGarra.fltX--;
     }
 }
 
@@ -159,7 +158,7 @@ void Update(){
 
 void Tempo(int value){
     if(blnMovimentacaoHabilidata == false){
-        crdGarra = MovimentaGarra(crdGarra, grrGarra);
+        grrGarra = MovimentaGarra(grrGarra);
         blnMovimentacaoHabilidata = HabilitarMovimento();
     }
     else
