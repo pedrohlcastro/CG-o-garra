@@ -48,11 +48,20 @@ void desenhaGarra(Garra grrGarra){
             glScalef (crdTamanhoSuporte.fltX + (intTamanhoDescida), crdTamanhoSuporte.fltY, crdTamanhoSuporte.fltZ);
             glutSolidCube (1.0);
         glPopMatrix();
+        //Esfera
+        glTranslatef (1.0 + (intTamanhoDescida/2), 0.0, 0.0);
+        glPushMatrix();
+            glColor4f(0.0f, 0.0f, 0.0f, 0.0f);
+            glutSolidSphere(0.4,200,200);
+        glPopMatrix();
+        glTranslatef (-(1.0 + (intTamanhoDescida/2)), 0.0, 0.0);
+        glColor3f(1.0,1.0,1.0);
 
         //Garra Direita
         glColor3f(0.0,1.0,0.0);
         glPushMatrix();
             glTranslatef (crdGarrasEsquerdaDireita.fltX + (intTamanhoDescida/2), crdGarrasEsquerdaDireita.fltY, crdGarrasEsquerdaDireita.fltZ);
+
             glPushMatrix();
                 glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
                 glutWireCube (0.8);
