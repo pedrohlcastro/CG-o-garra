@@ -59,70 +59,70 @@ void desenhaSkybox(float fltSize){
     bool blnTextureEnabled = glIsEnabled(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
-    //glEnable(GL_TEXTURE_2D);
-    //glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
     glPushMatrix();
         glBegin(GL_QUADS);
             //back face
             glColor4f(1,1,1,1);
-            //glTexCoord2f(0,0);      
+            glTexCoord2f(0,0);      
             glVertex3f(fltSize/2,fltSize/2,fltSize/2);       
-            //glTexCoord2f(1,0);
+            glTexCoord2f(1,0);
             glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-            //glTexCoord2f(1,1);
+            glTexCoord2f(1,1);
             glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
-            //glTexCoord2f(0,1);
+            glTexCoord2f(0,1);
             glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
         glEnd();
-        //glDisable(GL_TEXTURE_2D);
+        glDisable(GL_TEXTURE_2D);
 
-        //glEnable(GL_TEXTURE_2D);
-        //glBindTexture(GL_TEXTURE_2D,intSkybox[LADOS]);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,intSkybox[LADOS]);
         glBegin(GL_QUADS);
             //left face
             glColor4f(1,1,1,1);
-            //glTexCoord2f(0,0);
+            glTexCoord2f(0,0);
             glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-            //glTexCoord2f(1,0);
+            glTexCoord2f(1,0);
             glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
-            //glTexCoord2f(1,1);
+            glTexCoord2f(1,1);
             glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
-            //glTexCoord2f(0,1);
+            glTexCoord2f(0,1);
             glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
         glEnd();
-        //glDisable(GL_TEXTURE_2D);
+        glDisable(GL_TEXTURE_2D);
 
-        //glEnable(GL_TEXTURE_2D);
-        //glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
         glBegin(GL_QUADS);
             //front face
             glColor4f(1,1,1,1);
-            //glTexCoord2f(1,0);
+            glTexCoord2f(1,0);
             glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
-            //glTexCoord2f(0,0);
+            glTexCoord2f(0,0);
             glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
-            //glTexCoord2f(0,1);
+            glTexCoord2f(0,1);
             glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
-            //glTexCoord2f(1,1);
+            glTexCoord2f(1,1);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
-        //glDisable(GL_TEXTURE_2D);
+        glDisable(GL_TEXTURE_2D);
 
-        //glEnable(GL_TEXTURE_2D);
-        //glBindTexture(GL_TEXTURE_2D,intSkybox[LADOS]);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,intSkybox[LADOS]);
         glBegin(GL_QUADS);
             //right face
             glColor4f(1,1,1,1);
-            //glTexCoord2f(0,0);
+            glTexCoord2f(0,0);
             glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
-            //glTexCoord2f(1,0);
+            glTexCoord2f(1,0);
             glVertex3f(fltSize/2,fltSize/2,fltSize/2);
-            //glTexCoord2f(1,1);
+            glTexCoord2f(1,1);
             glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
-            //glTexCoord2f(0,1);
+            glTexCoord2f(0,1);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
-        //glDisable(GL_TEXTURE_2D);
+        glDisable(GL_TEXTURE_2D);
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,intSkybox[TETO]);
@@ -153,11 +153,11 @@ void desenhaSkybox(float fltSize){
             glTexCoord2f(1,0);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
+        glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
-    glEnable(GL_LIGHTING);
+    //glEnable(GL_LIGHTING);
     glEnable(GL_DEPTH_TEST);
 
-    if(!blnTextureEnabled)
-        glDisable(GL_TEXTURE_2D);
+    
 }

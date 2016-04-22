@@ -21,7 +21,7 @@ void desenhaGarra(Coordenadas crdGarra, Garra grrGarra){
         glRotatef ((GLfloat) anguloOmbro, 0.5, 0.0, 0.0);
         glTranslatef (0.0, 0.0, 0.0);
         glPushMatrix();
-            glColor3f(1.0,1.0,1.0);
+            glColor3f(0.0,1.0,0.0);
             glScalef (1.0, 1.0, 1.0);
             glutWireCube (1.0);
         glPopMatrix();
@@ -37,7 +37,7 @@ void desenhaGarra(Coordenadas crdGarra, Garra grrGarra){
         glPopMatrix();
 
         //Garra Direita
-        glColor3f(1.0,1.0,1.0);
+        glColor3f(0.0,1.0,0.0);
         glPushMatrix();
             glTranslatef (0.7, -0.09, 0.0);
             glRotatef (0.0, 0.0, 0.0, 0.0);

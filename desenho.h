@@ -1,0 +1,1 @@
+void desenhaCuboCustomizado(float fltSize,Cor corObjeto);

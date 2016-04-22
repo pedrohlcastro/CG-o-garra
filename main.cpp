@@ -9,11 +9,13 @@
 #include "skybox.h"
 #include "estruturas_basicas.h"
 #include "garra.h"
+#include "desenho.h"
 
 using namespace std;
 
 Coordenadas crdCamera, crdGarra;
 Garra grrGarra;
+Cor corObjeto;
 
 void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
@@ -21,6 +23,7 @@ void Inicializa(){
     crdCamera = {0, 1, 3};
     crdGarra = {-2.0, 2.0, 0.0};
     grrGarra = {0, 0, 0 ,0};
+    corObjeto = {1, 1, 1, 0.3};
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef (0.0, 0.0, -5.0);
@@ -32,22 +35,22 @@ void Desenha(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glColor4f(1,1,1,1);
     glEnable(GL_DEPTH_TEST);
 
     desenhaSkybox(12);
-    // caixa da Garra...
-    glPushMatrix();
-        glTranslated(0,0,0);
-        glutWireCube(5);
-    glPopMatrix();
-
     //objeto dentro da garra
     glPushMatrix();
         /*glTranslated(0,-2,0);
         glutSolidSphere(0.5,100,100);*/
         desenhaGarra(crdGarra, grrGarra);
     glPopMatrix();
+    // caixa da Garra...
+    glPushMatrix();
+        glTranslated(0,0,0);
+        desenhaCuboCustomizado(5,corObjeto);
+    glPopMatrix();
+
+    
 
     glutSwapBuffers();
 }
