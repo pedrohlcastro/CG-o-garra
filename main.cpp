@@ -13,16 +13,19 @@
 
 using namespace std;
 
-Coordenadas crdCamera, crdGarra;
-Garra grrGarra;
+Coordenadas crdCamera = {0, 1, 3};
+Coordenadas crdGarra = {-2.0, 2.0, -2.0};
+Coordenadas crdTamanhoMinimoCubo = {-2, -2, -2};
+Coordenadas crdTamanhoMaximoCubo = {2, 2, 2};
+Garra grrGarra = {0, 0, 0 ,0};;
+
+int intTempo = 0;
+bool blnMovimentacaoHabilidata = true;
 Cor corObjeto;
 
 void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel (GL_FLAT);
-    crdCamera = {0, 1, 3};
-    crdGarra = {-2.0, 2.0, 0.0};
-    grrGarra = {0, 0, 0 ,0};
     corObjeto = {1, 1, 1, 0.3};
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -118,6 +121,10 @@ void Teclado(unsigned char key, int x, int y){
                 grrGarra.intSuperior = (grrGarra.intSuperior - 5) % 360;
             glutPostRedisplay();
             break;
+        case ' ':
+            IniciarMovimentacaoAutomatico();
+            blnMovimentacaoHabilidata = false;
+            break;
 
         default:
             break;
@@ -126,21 +133,36 @@ void Teclado(unsigned char key, int x, int y){
 
 void MovimentaGarra(int key, int x, int y){
     if(key == GLUT_KEY_UP){
-        crdGarra.fltZ++;
+        if(crdGarra.fltZ < crdTamanhoMaximoCubo.fltZ && blnMovimentacaoHabilidata)
+            crdGarra.fltZ++;
     }
     if(key == GLUT_KEY_DOWN){
-        crdGarra.fltZ--;
+        if(crdGarra.fltZ > crdTamanhoMinimoCubo.fltZ && blnMovimentacaoHabilidata)
+            crdGarra.fltZ--;
     }
     if(key == GLUT_KEY_RIGHT){
-        crdGarra.fltX++;
+        if(crdGarra.fltX < crdTamanhoMaximoCubo.fltX && blnMovimentacaoHabilidata)
+            crdGarra.fltX++;
     }
     if(key == GLUT_KEY_LEFT){
-        crdGarra.fltX--;
+        if(crdGarra.fltX > crdTamanhoMinimoCubo.fltX && blnMovimentacaoHabilidata)
+            crdGarra.fltX--;
     }
 }
 
 void Update(){
     glutPostRedisplay();
+}
+
+void Tempo(int value){
+    if(blnMovimentacaoHabilidata == false){
+        crdGarra = MovimentaGarra(crdGarra, grrGarra);
+        blnMovimentacaoHabilidata = HabilitarMovimento();
+    }
+    else
+        intTempo = 0;
+
+    glutTimerFunc(1000, Tempo, 0);
 }
 
 int main(int argc, char** argv){
@@ -153,11 +175,12 @@ int main(int argc, char** argv){
     glutReshapeFunc(Redimensiona);
     Inicializa();
     glutDisplayFunc(Desenha);
-    
-    
+
+
     glutKeyboardFunc(Teclado);
     glutSpecialFunc(MovimentaGarra);
     glutIdleFunc(Update);
+    glutTimerFunc(0, Tempo, 0);
     glutMainLoop();
     return 0;
 }

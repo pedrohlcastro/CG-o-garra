@@ -43,7 +43,12 @@
 			<Add option="-Wall" />
 			<Add option="-g" />
 		</Compiler>
+		<Unit filename="../estruturas_basicas.h" />
+		<Unit filename="../garra.cpp" />
+		<Unit filename="../garra.h" />
 		<Unit filename="../main.cpp" />
+		<Unit filename="../skybox.cpp" />
+		<Unit filename="../skybox.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
