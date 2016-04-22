@@ -27,6 +27,15 @@ bool blnAbrir = false;
 
 float intTamanhoDescida = 0;
 
+Coordenadas crdEsfera;
+
+void AtualizaCoordenadaEsfera(Coordenadas crdGarra){
+    crdEsfera.fltX = crdGarra.fltX;
+    crdEsfera.fltY = crdGarra.fltY;
+    crdEsfera.fltZ = crdGarra.fltZ;
+
+    crdEsfera.fltY -= 2.0 + (intTamanhoDescida/2);
+}
 
 void desenhaGarra(Garra grrGarra){
     //glClear (GL_COLOR_BUFFER_BIT);
@@ -154,6 +163,8 @@ void desenhaGarra(Garra grrGarra){
         glPopMatrix();
 
     glPopMatrix();
+
+    AtualizaCoordenadaEsfera(grrGarra.crdGarra);
 }
 
 bool HabilitarMovimento(){
@@ -218,4 +229,8 @@ Garra MovimentaGarra(Garra grrGarra){
     if (blnDescer && grrGarra.intDireita == 0)
         blnAbrir = true;
     return grrGarra;
+}
+
+Coordenadas GetCoordenadaEsfera(){
+    return crdEsfera;
 }

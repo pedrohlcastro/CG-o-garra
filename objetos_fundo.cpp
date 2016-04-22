@@ -10,6 +10,7 @@
 #include "estruturas_basicas.h"
 #include "objetos_fundo.h"
 #include <time.h>
+#include<math.h>
 using namespace std;
 
 objetosFundo objfVetorObjetos[1000];
@@ -74,4 +75,23 @@ void desenhaObjetosFundo(int intQtd){
 		else
 			intY-=0.2;
 	}
+}
+
+void Colisao(Coordenadas crdEsfera, int intQtd){
+
+    float fltDistanciaX;
+    float fltRaio = 0.4;
+    float fltTamanhoCubo = 0.5;
+    bool blnRetorno = false;
+
+    for(int i=0; i < intQtd; i++){
+        fltDistanciaX = sqrt(pow(crdEsfera.fltX - objfVetorObjetos[i].crdObjetosFundo.fltX, 2) + pow(crdEsfera.fltY - objfVetorObjetos[i].crdObjetosFundo.fltY, 2) + pow(crdEsfera.fltZ - objfVetorObjetos[i].crdObjetosFundo.fltZ, 2));
+        if (fltDistanciaX < (fltTamanhoCubo + fltRaio)) { blnRetorno = true; };
+        if(blnRetorno){
+            cout << "Colidiu" << endl;
+        }
+
+    }
+
+
 }

@@ -8,3 +8,4 @@ typedef struct objetosFundo{
 
 int setObjetosFundo(int intFase,float fltAreaCaixaVidro);
 void desenhaObjetosFundo(int intQtd);
+void Colisao(Coordenadas, int);

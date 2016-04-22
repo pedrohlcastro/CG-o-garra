@@ -171,6 +171,11 @@ void Tempo(int value){
     glutTimerFunc(1000, Tempo, 0);
 }
 
+void VerificaColisao(int value){
+    Colisao(GetCoordenadaEsfera(), intQtdObjetosFundo);
+    glutTimerFunc(0, VerificaColisao, 0);
+}
+
 int main(int argc, char** argv){
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
@@ -187,6 +192,7 @@ int main(int argc, char** argv){
     glutSpecialFunc(MovimentaGarra);
     glutIdleFunc(Update);
     glutTimerFunc(0, Tempo, 0);
+    glutTimerFunc(0, VerificaColisao, 0);
     glutMainLoop();
     return 0;
 }
