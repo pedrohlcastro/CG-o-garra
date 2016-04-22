@@ -12,8 +12,9 @@
 
 using namespace std;
 
+int intImgLogo;
+
 void desenhaCuboCustomizado(float fltSize,Cor corObjeto){
-    //glDisable(GL_DEPTH_TEST);
     glPushMatrix();
         glBegin(GL_QUADS);
             // front face
@@ -52,9 +53,21 @@ void desenhaCuboCustomizado(float fltSize,Cor corObjeto){
             glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
             glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
-
-            cout<<corObjeto.fltG<<endl;
         glEnd();
     glPopMatrix();
-    //glEnable(GL_DEPTH_TEST);
+}
+
+void desenhaMaquina(float fltSize,Cor corObjeto){
+    glPushMatrix();
+        //base da maquina
+        glTranslated(0,-5,0);
+        desenhaCuboCustomizado(5,corObjeto);
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(0,5,0);
+        desenhaCuboCustomizado(5,corObjeto);
+    glPopMatrix();
+    
+
 }

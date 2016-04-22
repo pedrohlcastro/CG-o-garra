@@ -16,7 +16,12 @@ GLint intSkybox[4];
 
 void setupTexturasSkybox(){
     intSkybox[FUNDO] = SOIL_load_OGL_texture(
-        "../img/fundo.png",
+        #ifdef WIN32
+            "img/fundo.png"
+        #else
+            "../img/fundo.png",
+        #endif
+        
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         SOIL_FLAG_INVERT_Y
@@ -27,7 +32,11 @@ void setupTexturasSkybox(){
     }
 
     intSkybox[LADOS] = SOIL_load_OGL_texture(
-        "../img/lados.png",
+        #ifdef WIN32
+            "img/lados.png"
+        #else
+            "../img/lados.png",
+        #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         SOIL_FLAG_INVERT_Y
@@ -36,7 +45,11 @@ void setupTexturasSkybox(){
         printf("Erro carregando textura: '%s'\n", SOIL_last_result());
     }
     intSkybox[CHAO] = SOIL_load_OGL_texture(
-        "../img/chao.png",
+        #ifdef WIN32
+            "img/chao.png"
+        #else
+            "../img/chao.png",
+        #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         SOIL_FLAG_INVERT_Y
@@ -45,7 +58,11 @@ void setupTexturasSkybox(){
         printf("Erro carregando textura: '%s'\n", SOIL_last_result());
     }
     intSkybox[TETO] = SOIL_load_OGL_texture(
-        "../img/teto.png",
+        #ifdef WIN32
+            "img/teto.png"
+        #else
+            "../img/teto.png",
+        #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         SOIL_FLAG_INVERT_Y

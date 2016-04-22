@@ -17,21 +17,20 @@ Coordenadas crdCamera = {0, 1, 3};
 Coordenadas crdGarra = {-2.0, 2.0, -2.0};
 Coordenadas crdTamanhoMinimoCubo = {-2, -2, -2};
 Coordenadas crdTamanhoMaximoCubo = {2, 2, 2};
-Garra grrGarra = {0, 0, 0 ,0};;
+Garra grrGarra = {0, 0, 0 ,0};
+Cor corMaquinaVidro = {1, 1, 1, 0.3};
+Cor corMaquina= {1, 0.5 , 0 , 1};
 
 int intTempo = 0;
 bool blnMovimentacaoHabilidata = true;
-Cor corObjeto;
 
 void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel (GL_FLAT);
-    corObjeto = {1, 1, 1, 0.3};
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef (0.0, 0.0, -5.0);
     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
-
 }
 
 void Desenha(){
@@ -47,10 +46,14 @@ void Desenha(){
         glutSolidSphere(0.5,100,100);*/
         desenhaGarra(crdGarra, grrGarra);
     glPopMatrix();
+
+    desenhaMaquina(5,corMaquina);
+
+
     // caixa da Garra...
     glPushMatrix();
         glTranslated(0,0,0);
-        desenhaCuboCustomizado(5,corObjeto);
+        desenhaCuboCustomizado(5,corMaquinaVidro);
     glPopMatrix();
 
     
