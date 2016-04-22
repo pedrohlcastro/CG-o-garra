@@ -9,7 +9,7 @@
 #include <iostream>
 #include "estruturas_basicas.h"
 #include "objetos_fundo.h"
-
+#include <time.h>
 using namespace std;
 
 objetosFundo objfVetorObjetos[1000];
@@ -25,10 +25,10 @@ int setObjetosFundo(int intFase,float fltAreaCaixaVidro){
         #else
             fileCordenadas=fopen("../cord_Obj/cordenadas1.txt","r");
         #endif
-		
+
 		if(fileCordenadas==NULL){
 			cout<<"ERRO ABRIR ARQUIVO"<<endl;
-		}	
+		}
 		fscanf(fileCordenadas,"%d",&intTam);
 		for(int i=0;i<intTam;i++){
 			fscanf(fileCordenadas,"%f",&aux);
@@ -37,7 +37,7 @@ int setObjetosFundo(int intFase,float fltAreaCaixaVidro){
 			objfVetorObjetos[i].crdObjetosFundo.fltY=aux;
 			fscanf(fileCordenadas,"%f",&aux);
 			objfVetorObjetos[i].crdObjetosFundo.fltZ=aux;
-			
+
 			int intTipoAux=rand()%4;
 			objfVetorObjetos[i].intTipo=CUBO;
 			objfVetorObjetos[i].fltTamanhoObjeto = 0.5;
@@ -48,7 +48,7 @@ int setObjetosFundo(int intFase,float fltAreaCaixaVidro){
 				objfVetorObjetos[i].fltTamanhoObjeto = 0.5;
 			}
 			else{
-				objfVetorObjetos[i].intTipo=ESFERA;	
+				objfVetorObjetos[i].intTipo=ESFERA;
 				objfVetorObjetos[i].fltTamanhoObjeto = 0.30;
 			}*/
 		}
@@ -57,7 +57,7 @@ int setObjetosFundo(int intFase,float fltAreaCaixaVidro){
 	return intTam;
 }
 
-void desenhaObjetosFundo(int intQtd){	
+void desenhaObjetosFundo(int intQtd){
 	//cor provisoria
 	float intX=1,intY=1;
 	for(int i=0;i<intQtd;i++){
@@ -74,8 +74,4 @@ void desenhaObjetosFundo(int intQtd){
 		else
 			intY-=0.2;
 	}
-}
-
-void testeColisao(Garra grrGarra){
-
 }
