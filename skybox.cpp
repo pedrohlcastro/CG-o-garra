@@ -11,17 +11,17 @@
 
 using namespace std;
 
-enum intTextura{FUNDO=0,LADOS,CHAO,TETO};
-GLint intSkybox[4];
+enum intTextura{FUNDO=0,LADO1,LADO2,CHAO,TETO};
+GLint intSkybox[5];
 
 void setupTexturasSkybox(){
 
 
     intSkybox[FUNDO] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/fundo.png",
+            "img/centro.jpg",
         #else
-            "../img/fundo.png",
+            "../img/centro.jpg",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
@@ -32,24 +32,39 @@ void setupTexturasSkybox(){
         printf("Erro carregando textura: '%s'\n", SOIL_last_result());
     }
 
-    intSkybox[LADOS] = SOIL_load_OGL_texture(
+    intSkybox[LADO1] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/lados.png",
+            "img/lado1.jpg",
         #else
-            "../img/lados.png",
+            "../img/lado1.jpg",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
         SOIL_FLAG_INVERT_Y
     );
-    if (intSkybox[LADOS] == 0 ) {
+    if (intSkybox[LADO1] == 0 ) {
         printf("Erro carregando textura: '%s'\n", SOIL_last_result());
     }
+
+    intSkybox[LADO2] = SOIL_load_OGL_texture(
+        #ifdef WIN32
+            "img/lado2.jpg",
+        #else
+            "../img/lado2.jpg",
+        #endif
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_INVERT_Y
+    );
+    if (intSkybox[LADO2] == 0 ) {
+        printf("Erro carregando textura: '%s'\n", SOIL_last_result());
+    }
+
     intSkybox[CHAO] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/chao.png",
+            "img/chao.jpg",
         #else
-            "../img/chao.png",
+            "../img/chao.jpg",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
@@ -60,9 +75,9 @@ void setupTexturasSkybox(){
     }
     intSkybox[TETO] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/teto.png",
+            "img/teto.jpg",
         #else
-            "../img/teto.png",
+            "../img/teto.jpg",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
@@ -75,37 +90,22 @@ void setupTexturasSkybox(){
 
 void desenhaSkybox(float fltSize){
     bool blnTextureEnabled = glIsEnabled(GL_TEXTURE_2D);
-   // glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
     glPushMatrix();
-        glBegin(GL_QUADS);
-            //back face
-            glColor4f(1,1,1,1);
-            glTexCoord2f(0,0);
-            glVertex3f(fltSize/2,fltSize/2,fltSize/2);
-            glTexCoord2f(1,0);
-            glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-            glTexCoord2f(1,1);
-            glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
-            glTexCoord2f(0,1);
-            glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
-        glEnd();
-        glDisable(GL_TEXTURE_2D);
-
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D,intSkybox[LADOS]);
+        glBindTexture(GL_TEXTURE_2D,intSkybox[LADO1]);
         glBegin(GL_QUADS);
             //left face
             glColor4f(1,1,1,1);
-            glTexCoord2f(0,0);
-            glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-            glTexCoord2f(1,0);
-            glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
-            glTexCoord2f(1,1);
-            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
             glTexCoord2f(0,1);
+            glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
+            glTexCoord2f(1,1);
+            glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
+            glTexCoord2f(1,0);
+            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
+            glTexCoord2f(0,0);
             glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
         glEnd();
         glDisable(GL_TEXTURE_2D);
@@ -115,29 +115,29 @@ void desenhaSkybox(float fltSize){
         glBegin(GL_QUADS);
             //front face
             glColor4f(1,1,1,1);
-            glTexCoord2f(1,0);
-            glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
-            glTexCoord2f(0,0);
-            glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
             glTexCoord2f(0,1);
-            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
+            glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
             glTexCoord2f(1,1);
+            glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
+            glTexCoord2f(1,0);
+            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
+            glTexCoord2f(0,0);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
         glDisable(GL_TEXTURE_2D);
 
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D,intSkybox[LADOS]);
+        glBindTexture(GL_TEXTURE_2D,intSkybox[LADO2]);
         glBegin(GL_QUADS);
             //right face
             glColor4f(1,1,1,1);
-            glTexCoord2f(0,0);
-            glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
-            glTexCoord2f(1,0);
-            glVertex3f(fltSize/2,fltSize/2,fltSize/2);
-            glTexCoord2f(1,1);
-            glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
             glTexCoord2f(0,1);
+            glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
+            glTexCoord2f(1,1);
+            glVertex3f(fltSize/2,fltSize/2,fltSize/2);
+            glTexCoord2f(1,0);
+            glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
+            glTexCoord2f(0,0);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
         glDisable(GL_TEXTURE_2D);
@@ -148,11 +148,11 @@ void desenhaSkybox(float fltSize){
             glColor4f(1,1,1,1);
             glTexCoord2f(1,0);
             glVertex3f(fltSize/2,fltSize/2,fltSize/2);
-            glTexCoord2f(0,0);
+            glTexCoord2f(1,1);
             glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
             glTexCoord2f(0,1);
             glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
-            glTexCoord2f(1,1);
+            glTexCoord2f(0,0);
             glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
         glEnd();
         glDisable(GL_TEXTURE_2D);
@@ -162,19 +162,19 @@ void desenhaSkybox(float fltSize){
         glBegin(GL_QUADS);
             //bottom face
             glColor4f(1,1,1,1);
-            glTexCoord2f(1,1);
-            glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
-            glTexCoord2f(0,1);
-            glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
-            glTexCoord2f(0,0);
-            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
             glTexCoord2f(1,0);
+            glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
+            glTexCoord2f(1,1);
+            glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
+            glTexCoord2f(0,1);
+            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
+            glTexCoord2f(0,0);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
         glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
-    //glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHTING);
     glEnable(GL_DEPTH_TEST);
 
 
