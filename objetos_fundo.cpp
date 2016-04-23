@@ -90,6 +90,9 @@ void Colisao(Coordenadas crdEsfera, int intQtd){
         if(blnRetorno){
             cout << "Colidiu" << endl;
         }
+        else{
+        	cout<<"Nao Colidiu"<<endl;
+        }
 
     }
 

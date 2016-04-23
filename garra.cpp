@@ -61,7 +61,7 @@ void desenhaGarra(Garra grrGarra){
         glTranslatef (1.0 + (intTamanhoDescida/2), 0.0, 0.0);
         glPushMatrix();
             glColor4f(0.0f, 0.0f, 0.0f, 0.0f);
-            glutSolidSphere(0.4,200,200);
+            glutSolidSphere(0.25,200,200);
         glPopMatrix();
         glTranslatef (-(1.0 + (intTamanhoDescida/2)), 0.0, 0.0);
         glColor3f(1.0,1.0,1.0);
