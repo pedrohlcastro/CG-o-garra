@@ -18,12 +18,10 @@ Coordenadas crdCamera = {0, 1, 3};
 Coordenadas crdTamanhoMinimoCubo = {-2, -2, -2};
 Coordenadas crdTamanhoMaximoCubo = {2, 2, 2};
 Garra grrGarra = {0, 0, 0 ,0, {-2.0, 2.0, -2.0}};
-Cor corMaquinaVidro = {1, 1, 1, 0.3};
 Cor corMaquina= {1, 0.5 , 0 , 1};
 
 int intTempo = 0;
 bool blnMovimentacaoHabilidata = true;
-
 int intQtdObjetosFundo;
 
 void Inicializa(){
@@ -35,7 +33,7 @@ void Inicializa(){
     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
 
     //carrega objetos fundo...
-    intQtdObjetosFundo = setObjetosFundo(1,5);
+    intQtdObjetosFundo = setObjetosFundo(1,5);   
 }
 
 void Desenha(){
@@ -43,23 +41,71 @@ void Desenha(){
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    
+    float luzPosition[]={0, 0, 0, 1};
+
+    //luz no centro do topo da maquina...
+    float fltLuzAmb[] = { 1.0, 1.0, 1.0, 1.0 };
+    float fltLuzDif[] = { 1.0, 1.0, 1.0, 1.0 };
+    float fltLuzSpec[] = { 1, 1, 1, 1.0 };
+    float fltLuzGlobal[]={ 0.5, 0.5, 0.5, 0 };
+
+    //propriedadas da "lampada" e de luz Global
+    glLightfv(GL_LIGHT0, GL_AMBIENT, fltLuzAmb);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, fltLuzDif);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, fltLuzSpec);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, fltLuzGlobal); 
+    
+    // Desanhando a lampada 0...
+    glDisable(GL_LIGHTING);
+    glPushMatrix();
+        glLightfv(GL_LIGHT0, GL_POSITION, luzPosition);
+        glTranslatef(0, 3, 0);
+        glColor3f(0.5, 0.5, 0.5);
+        glutWireSphere(0.5, 8, 8);
+    glPopMatrix();
+    
+    //desenhando cena
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
 
     desenhaSkybox(12);
 
+    //Cores de luz usadas
+    float fltLuzBranca[]={1,1,1,1};
+    float fltLuzLaranja[]={1, 0.5 , 0 , 1};
+    float fltLuzPreta[]={0,0,0,1};
+    float fltLuzBrancaReflexo[]={1, 1, 1, 0.2}; //vidro
+    float fltMaterialLiso[]={60}; //quao liso o material é
+
+    //luz especular dos materiais...
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,fltLuzSpec);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
+
+
     //objeto dentro da garra
     glPushMatrix();
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBranca);
         desenhaGarra(grrGarra);
         desenhaObjetosFundo(intQtdObjetosFundo);
     glPopMatrix();
 
-    //maquina
+    fltLuzBrancaReflexo[0]=80;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzLaranja);
     desenhaMaquina(5,corMaquina);
 
     // caixa da Garra...
     glPushMatrix();
         glTranslated(0,0,0);
-        desenhaCuboCustomizado(5,corMaquinaVidro);
+        glColor3f(1,1,1);
+        fltLuzBrancaReflexo[0]=128;
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBrancaReflexo);
+        glutSolidCube(5);
     glPopMatrix();
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBranca);
 
     glutSwapBuffers();
 }

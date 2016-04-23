@@ -61,9 +61,12 @@ int setObjetosFundo(int intFase,float fltAreaCaixaVidro){
 void desenhaObjetosFundo(int intQtd){
 	//cor provisoria
 	float intX=1,intY=1;
+
 	for(int i=0;i<intQtd;i++){
 		glPushMatrix();
 			glColor3f(intX,intY,1);
+			float corDif[]={intX,intY,1,1};
+			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, corDif);
         	glTranslatef(objfVetorObjetos[i].crdObjetosFundo.fltX,objfVetorObjetos[i].crdObjetosFundo.fltY,objfVetorObjetos[i].crdObjetosFundo.fltZ);
         	if(objfVetorObjetos[i].intTipo==CUBO)
         		glutSolidCube(objfVetorObjetos[i].fltTamanhoObjeto);
@@ -89,9 +92,6 @@ void Colisao(Coordenadas crdEsfera, int intQtd){
         if (fltDistanciaX < (fltTamanhoCubo + fltRaio)) { blnRetorno = true; };
         if(blnRetorno){
             cout << "Colidiu" << endl;
-        }
-        else{
-        	cout<<"Nao Colidiu"<<endl;
         }
 
     }

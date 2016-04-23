@@ -75,7 +75,7 @@ void setupTexturasSkybox(){
 
 void desenhaSkybox(float fltSize){
     bool blnTextureEnabled = glIsEnabled(GL_TEXTURE_2D);
-    glDisable(GL_LIGHTING);
+   // glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);

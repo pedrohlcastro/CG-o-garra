@@ -38,7 +38,6 @@ void AtualizaCoordenadaEsfera(Coordenadas crdGarra){
 }
 
 void desenhaGarra(Garra grrGarra){
-    //glClear (GL_COLOR_BUFFER_BIT);
     //Garra
     glColor3f(1.0,1.0,1.0);
     glPushMatrix();
@@ -46,7 +45,7 @@ void desenhaGarra(Garra grrGarra){
         glRotatef ((GLfloat) anguloOmbro, 0.0, 0.0, 1.0);
         glRotatef ((GLfloat) anguloOmbro, 0.5, 0.0, 0.0);
         glPushMatrix();
-            glColor3f(0.0,1.0,0.0);
+            glColor3f(1.0,1.0,1.0);
             glutSolidCube (1.0);
         glPopMatrix();
 
@@ -60,14 +59,19 @@ void desenhaGarra(Garra grrGarra){
         //Esfera
         glTranslatef (1.0 + (intTamanhoDescida/2), 0.0, 0.0);
         glPushMatrix();
-            glColor4f(0.0f, 0.0f, 0.0f, 0.0f);
+            glColor4f(1.0,1.0,1.0,0.0);
+            float fltLuzDif[]={1,1,1,0};
+            float fltLuzEsp[]={1,1,1,0};
+            glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzDif);
             glutSolidSphere(0.25,200,200);
         glPopMatrix();
+        fltLuzDif[0]=1; fltLuzDif[1]=1; fltLuzDif[2]=1; fltLuzDif[3]=1;
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzDif);
         glTranslatef (-(1.0 + (intTamanhoDescida/2)), 0.0, 0.0);
         glColor3f(1.0,1.0,1.0);
 
         //Garra Direita
-        glColor3f(0.0,1.0,0.0);
+        glColor3f(1.0,1.0,1.0);
         glPushMatrix();
             glTranslatef (crdGarrasEsquerdaDireita.fltX + (intTamanhoDescida/2), crdGarrasEsquerdaDireita.fltY, crdGarrasEsquerdaDireita.fltZ);
 

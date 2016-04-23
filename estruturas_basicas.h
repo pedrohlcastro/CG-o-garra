@@ -12,3 +12,7 @@ typedef struct Cor{
 	float fltR,fltG,fltB,fltAlfa;
 }Cor;
 
+typedef struct Luz{
+	Coordenadas crdLuz;
+	float fltCoodenadaHomogenea;
+}Luz;
