@@ -2,8 +2,8 @@ CC=g++
 OPCOES_COMPILADOR=-I. -lSOIL -lGL -lGLU -lglut -lGLEW -lm
 all:arquivos
 
-arquivos: main.o skybox.o garra.o desenho.o objetos_fundo.o
-	$(CC) main.o skybox.o garra.o desenho.o objetos_fundo.o -o executavel $(OPCOES_COMPILADOR)
+arquivos: main.o skybox.o garra.o desenho.o objetos_fundo.o telasControle.o
+	$(CC) main.o skybox.o garra.o desenho.o objetos_fundo.o telasControle.o -o executavel $(OPCOES_COMPILADOR)
 	@echo "\nCRIADO COM SUCESSO UTILIZE MAKE RUN PARA RODAR\n"
 
 main.o: ../main.cpp
@@ -20,6 +20,10 @@ desenho.o: ../desenho.cpp
 
 objetos_fundo.o: ../objetos_fundo.cpp
 	$(CC) -o objetos_fundo.o -c ../objetos_fundo.cpp $(OPCOES_COMPILADOR)
+
+telasControle.o: ../telasControle.cpp
+	$(CC) -o telasControle.o -c ../telasControle.cpp $(OPCOES_COMPILADOR)
+
 run:
 	./executavel
 

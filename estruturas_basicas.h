@@ -16,3 +16,5 @@ typedef struct Luz{
 	Coordenadas crdLuz;
 	float fltCoodenadaHomogenea;
 }Luz;
+
+#define ENTER 13
