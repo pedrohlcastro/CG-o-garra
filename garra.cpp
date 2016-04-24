@@ -9,6 +9,7 @@
 
 #include <bits/stdc++.h>
 #include "estruturas_basicas.h"
+#include "objetos_fundo.h"
 
 int anguloOmbro = 270, anguloSuporte = 0;
 
@@ -24,6 +25,7 @@ bool blnMovimentoEixoX = false;
 bool blnMovimentando = false;
 bool blnFechar = false;
 bool blnAbrir = false;
+bool blnDescidaObjeto = false;
 
 float intTamanhoDescida = 0;
 
@@ -172,7 +174,7 @@ void desenhaGarra(Garra grrGarra){
 }
 
 bool HabilitarMovimento(){
-    if(blnDescer && blnSubir && blnMovimentoEixoZ && blnMovimentoEixoX && blnFechar && blnAbrir){
+    if(blnDescer && blnSubir && blnMovimentoEixoZ && blnMovimentoEixoX && blnFechar && blnAbrir && blnDescidaObjeto){
         blnMovimentando = false;
         blnDescer = false;
         blnSubir = false;
@@ -180,6 +182,7 @@ bool HabilitarMovimento(){
         blnMovimentoEixoX = false;
         blnFechar = false;
         blnAbrir = false;
+        blnDescidaObjeto = false;
     }
 
     return !blnMovimentando;
@@ -194,10 +197,11 @@ void IniciarMovimentacaoAutomatico(){
     blnMovimentoEixoX = false;
     blnFechar = false;
     blnAbrir = false;
+    blnDescidaObjeto = false;
 }
 
 
-Garra MovimentaGarra(Garra grrGarra){
+Garra MovimentaGarra(Garra grrGarra, int intIndexObjeto){
     if(grrGarra.crdGarra.fltX == -2)
         blnMovimentoEixoX = true;
     if(grrGarra.crdGarra.fltZ == -2)
@@ -216,18 +220,32 @@ Garra MovimentaGarra(Garra grrGarra){
         grrGarra.intInferior = (grrGarra.intInferior + 5) % 360;
         grrGarra.intSuperior = (grrGarra.intSuperior + 5) % 360;
     }
-    else if(!blnSubir)
+    else if(!blnSubir){
         intTamanhoDescida--;
-    else if(!blnMovimentoEixoX)
+        if(intIndexObjeto != -1)
+            LevantaObjeto(intIndexObjeto);
+    }
+    else if(!blnMovimentoEixoX){
         grrGarra.crdGarra.fltX--;
-    else if(!blnMovimentoEixoZ)
+        if(intIndexObjeto != -1)
+            MovimentaObjetoEixoX(intIndexObjeto);
+    }
+    else if(!blnMovimentoEixoZ){
         grrGarra.crdGarra.fltZ--;
-    else {
+        if(intIndexObjeto != -1)
+            MovimentaObjetoEixoZ(intIndexObjeto);
+    }
+    else if(!blnAbrir) {
         grrGarra.intDireita = (grrGarra.intDireita - 5) % 360;
         grrGarra.intEsquerda = ((grrGarra.intEsquerda - 5) % 360);
         grrGarra.intInferior = (grrGarra.intInferior - 5) % 360;
         grrGarra.intSuperior = (grrGarra.intSuperior - 5) % 360;
     }
+    else{
+        blnDescidaObjeto = DesceObjeto();
+    }
+
+
     if(blnFechar && intTamanhoDescida == 0)
         blnSubir = true;
     if (blnDescer && grrGarra.intDireita == 0)

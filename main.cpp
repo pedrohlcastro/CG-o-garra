@@ -23,6 +23,7 @@ Cor corMaquina= {1, 0.5 , 0 , 1};
 int intTempo = 0;
 bool blnMovimentacaoHabilidata = true;
 int intQtdObjetosFundo;
+int intIndexObjeto = -1;
 
 void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
@@ -33,7 +34,7 @@ void Inicializa(){
     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
 
     //carrega objetos fundo...
-    intQtdObjetosFundo = setObjetosFundo(1,5);   
+    intQtdObjetosFundo = setObjetosFundo(1,5);
 }
 
 void Desenha(){
@@ -42,7 +43,7 @@ void Desenha(){
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
-    
+
     float luzPosition[]={0, 0, 0, 1};
 
     //luz no centro do topo da maquina...
@@ -55,8 +56,8 @@ void Desenha(){
     glLightfv(GL_LIGHT0, GL_AMBIENT, fltLuzAmb);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, fltLuzDif);
     glLightfv(GL_LIGHT0, GL_SPECULAR, fltLuzSpec);
-    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, fltLuzGlobal); 
-    
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, fltLuzGlobal);
+
     // Desanhando a lampada 0...
     glDisable(GL_LIGHTING);
     glPushMatrix();
@@ -65,7 +66,7 @@ void Desenha(){
         glColor3f(0.5, 0.5, 0.5);
         glutWireSphere(0.5, 8, 8);
     glPopMatrix();
-    
+
     //desenhando cena
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -202,13 +203,11 @@ void MovimentaGarra(int key, int x, int y){
 
 void Update(){
     glutPostRedisplay();
-    //testeColisao(grrGarra);
-    //cout<<grrGarra.crdGarra.fltX<<" "<<grrGarra.crdGarra.fltY<<grrGarra.crdGarra.fltZ<<endl;
 }
 
 void Tempo(int value){
     if(blnMovimentacaoHabilidata == false){
-        grrGarra = MovimentaGarra(grrGarra);
+        grrGarra = MovimentaGarra(grrGarra, intIndexObjeto);
         blnMovimentacaoHabilidata = HabilitarMovimento();
     }
     else
@@ -218,7 +217,10 @@ void Tempo(int value){
 }
 
 void VerificaColisao(int value){
-    Colisao(GetCoordenadaEsfera(), intQtdObjetosFundo);
+    int intRetorno;
+    intRetorno = Colisao(GetCoordenadaEsfera(), intQtdObjetosFundo);
+    if(intRetorno != -1)
+        intIndexObjeto = intRetorno;
     glutTimerFunc(0, VerificaColisao, 0);
 }
 
