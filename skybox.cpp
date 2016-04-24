@@ -19,9 +19,9 @@ void setupTexturasSkybox(){
 
     intSkybox[FUNDO] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/centro.jpg",
+            "img/centro.png",
         #else
-            "../img/centro.jpg",
+            "../img/centro.png",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
@@ -34,9 +34,9 @@ void setupTexturasSkybox(){
 
     intSkybox[LADO1] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/lado1.jpg",
+            "img/lado1.png",
         #else
-            "../img/lado1.jpg",
+            "../img/lado1.png",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
@@ -48,9 +48,9 @@ void setupTexturasSkybox(){
 
     intSkybox[LADO2] = SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/lado2.jpg",
+            "img/lado2.png",
         #else
-            "../img/lado2.jpg",
+            "../img/lado2.png",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
@@ -94,6 +94,20 @@ void desenhaSkybox(float fltSize){
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
     glPushMatrix();
+        glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
+        glBegin(GL_QUADS);
+            //back face
+            glTexCoord2f(0,0);      
+            glVertex3f(fltSize/2,fltSize/2,fltSize/2);       
+            glTexCoord2f(1,0);    
+            glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
+            glTexCoord2f(1,1);
+            glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
+            glTexCoord2f(0,1);
+            glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
+        glEnd();
+        glDisable(GL_TEXTURE_2D);
+
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,intSkybox[LADO1]);
         glBegin(GL_QUADS);

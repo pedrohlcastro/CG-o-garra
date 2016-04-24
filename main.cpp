@@ -34,6 +34,7 @@ void Inicializa(){
 
     //carrega objetos fundo...
     intQtdObjetosFundo = setObjetosFundo(1,5);   
+    setupLogoDesenhoMaquina();
 }
 
 void Desenha(){
