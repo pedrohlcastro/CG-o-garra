@@ -14,6 +14,7 @@
 using namespace std;
 
 objetosFundo objfVetorObjetos[1000];
+int intIndexObjetoColisao;
 
 int setObjetosFundo(int intFase,float fltAreaCaixaVidro){
 	FILE * fileCordenadas;
@@ -67,7 +68,7 @@ void desenhaObjetosFundo(int intQtd){
 			glColor3f(intX,intY,1);
 			float corDif[]={intX,intY,1,1};
 			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, corDif);
-        	glTranslatef(objfVetorObjetos[i].crdObjetosFundo.fltX,objfVetorObjetos[i].crdObjetosFundo.fltY,objfVetorObjetos[i].crdObjetosFundo.fltZ);
+        	glTranslatef(objfVetorObjetos[i].crdObjetosFundo.fltX, objfVetorObjetos[i].crdObjetosFundo.fltY, objfVetorObjetos[i].crdObjetosFundo.fltZ);
         	if(objfVetorObjetos[i].intTipo==CUBO)
         		glutSolidCube(objfVetorObjetos[i].fltTamanhoObjeto);
         	if(objfVetorObjetos[i].intTipo==ESFERA)
@@ -80,21 +81,43 @@ void desenhaObjetosFundo(int intQtd){
 	}
 }
 
-void Colisao(Coordenadas crdEsfera, int intQtd){
+int Colisao(Coordenadas crdEsfera, int intQtd){
 
-    float fltDistanciaX;
+    float fltDistancia;
     float fltRaio = 0.4;
     float fltTamanhoCubo = 0.5;
-    bool blnRetorno = false;
+    int intIndexRetorno = -1;
+    int intAuxiliar = 0;
 
-    for(int i=0; i < intQtd; i++){
-        fltDistanciaX = sqrt(pow(crdEsfera.fltX - objfVetorObjetos[i].crdObjetosFundo.fltX, 2) + pow(crdEsfera.fltY - objfVetorObjetos[i].crdObjetosFundo.fltY, 2) + pow(crdEsfera.fltZ - objfVetorObjetos[i].crdObjetosFundo.fltZ, 2));
-        if (fltDistanciaX < (fltTamanhoCubo + fltRaio)) { blnRetorno = true; };
-        if(blnRetorno){
-            cout << "Colidiu" << endl;
+    for(intAuxiliar = 0; intAuxiliar < intQtd; intAuxiliar++){
+        fltDistancia = sqrt(pow(crdEsfera.fltX - objfVetorObjetos[intAuxiliar].crdObjetosFundo.fltX, 2) + pow(crdEsfera.fltY - objfVetorObjetos[intAuxiliar].crdObjetosFundo.fltY, 2) + pow(crdEsfera.fltZ - objfVetorObjetos[intAuxiliar].crdObjetosFundo.fltZ, 2));
+        if (fltDistancia < (fltTamanhoCubo + fltRaio)) {
+            return intAuxiliar;
         }
-
     }
 
+    return intAuxiliar;
+}
 
+void LevantaObjeto(int intIndexObjeto){
+    intIndexObjetoColisao = intIndexObjeto;
+    if(objfVetorObjetos[intIndexObjeto].crdObjetosFundo.fltY < 0)
+        objfVetorObjetos[intIndexObjeto].crdObjetosFundo.fltY++;
+}
+
+void MovimentaObjetoEixoX(int intIndexObjeto){
+    objfVetorObjetos[intIndexObjeto].crdObjetosFundo.fltX--;
+}
+
+void MovimentaObjetoEixoZ(int intIndexObjeto){
+    objfVetorObjetos[intIndexObjeto].crdObjetosFundo.fltZ--;
+}
+
+bool DesceObjeto(){
+    bool blnRetorno = false;
+    objfVetorObjetos[intIndexObjetoColisao].crdObjetosFundo.fltY--;
+    if(objfVetorObjetos[intIndexObjetoColisao].crdObjetosFundo.fltY < -2)
+        blnRetorno = true;
+
+    return blnRetorno;
 }

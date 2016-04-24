@@ -34,8 +34,12 @@ void Inicializa(){
     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
 
     //carrega objetos fundo...
+<<<<<<< HEAD
     intQtdObjetosFundo = setObjetosFundo(1,5);   
     setupLogoDesenhoMaquina();
+=======
+    intQtdObjetosFundo = setObjetosFundo(1,5);
+>>>>>>> master
 }
 
 void Desenha(){

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1461366749 source:c:\tp\tp2\trunk\main.cpp
+1461524821 source:c:\tp\tp2\trunk\main.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
@@ -13,9 +13,9 @@
 
 1461280380 c:\tp\tp2\trunk\skybox.h
 
-1461346762 c:\tp\tp2\trunk\estruturas_basicas.h
+1461520137 c:\tp\tp2\trunk\estruturas_basicas.h
 
-1461354810 source:c:\tp\tp2\trunk\skybox.cpp
+1461520137 source:c:\tp\tp2\trunk\skybox.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
@@ -24,17 +24,18 @@
 	"skybox.h"
 	"estruturas_basicas.h"
 
-1461368948 source:c:\tp\tp2\trunk\garra.cpp
+1461523558 source:c:\tp\tp2\trunk\garra.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
 	<SOIL/SOIL.h>
 	<bits/stdc++.h>
 	"estruturas_basicas.h"
+	"objetos_fundo.h"
 
-1461366601 c:\tp\tp2\trunk\garra.h
+1461520671 c:\tp\tp2\trunk\garra.h
 
-1461343271 c:\tp\tp2\trunk\desenho.h
+1461520694 c:\tp\tp2\trunk\desenho.h
 
 1461343271 source:c:\tp\tp2\trunk\desenho.cpp
 	<GL/glew.h>
@@ -44,9 +45,9 @@
 	<bits/stdc++.h>
 	"estruturas_basicas.h"
 
-1461366756 c:\tp\tp2\trunk\objetos_fundo.h
+1461524924 c:\tp\tp2\trunk\objetos_fundo.h
 
-1461368635 source:c:\tp\tp2\trunk\objetos_fundo.cpp
+1461523801 source:c:\tp\tp2\trunk\objetos_fundo.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
