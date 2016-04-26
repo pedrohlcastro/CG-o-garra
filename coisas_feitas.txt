@@ -1,0 +1,26 @@
+Mundo:
+	Deve haver um mundo definido razoavelmente grande, com um "chão" que pode ser modelado por um plano horizontal. OK!
+	No centro do mundo, deve haver uma claw machine simples, modelada de forma hierárquica. A garra pode ser feito usando-se apenas os sólidos da GLU e GLUT (cone, pirâmide, cubo, esfera, cilindro etc.).OK!
+	Deve haver 1 tipo de objeto, com instâncias espalhadas dentro da máquina (como brinquedos, balas etc.). Também é possível usar apenas GLU e GLUT para eles.OK!
+	Os objetos podem estar espalhados de forma que um não fique em cima do outro.OK!
+
+Garra:
+	Ela deve possuir ao menos 3 "dedos" para pegar os objetos e deve ser capaz de executar o movimento de abertura e fechamento dos "dedos".OK!
+	Caso não queira modelá-la com dedos, você pode criar algo semelhante, contanto que seja feita a modelagem de forma hierárquica (i.e., com glPushMatrix()...glPopMatrix aninhados)OK!
+	Pode ser controlada pelo usuário com movimentos em todos os sentidos dos eixos X e Z utilizando as "arrow keys" (↑→↓←).OK!
+	A barra de espaço deve fazer o movimento para que a barra desça para tentar capturar um objeto.OK!
+	Capturando ou não, a garra faz um movimento de descida, fecha os dedos, faz o movimento da subida e depois de retorno à sua "posição de repouso", só então abrindo os dedos e eventualmente liberando o objeto capturado.OK!
+	Durante a movimentação "automática", ela não pode ser controlada.OK!
+	Se a garra colide com um objeto, ela o captura, volta para sua altura original, volta para sua posição de repouso e solta o objeto.OK!
+	Para fins de verificação de colisão entre a garra e os objetos, você pode considerar todos como sendo esferas.OK!
+
+Câmera:
+	Você deve usar projeção perspectiva via glFrustum ou gluPerspective. OK!
+	A câmera deve estar posicionada simulando a forma como uma pessoa usa uma claw machine: com uma visão frontal.OK!
+	Ao posicionar o mouse próximo aos cantos laterais da tela, a câmera deve, ligeiramente e de forma progressiva, olhar para esse lado, como se o jogador estivesse girando a cabeça um pouco para a direita ou esquerda.OK!
+
+Gráficos:
+	Você deve usar o modelo de iluminação do OpenGL, devidamente configurado. OK!
+	Basta que sua cena tenha 1 fonte de luz direcional.OK!
+	Todos os objetos da cena devem ter materiais configurados (não necessariamente com textura).OK!
+
