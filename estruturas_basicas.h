@@ -18,3 +18,4 @@ typedef struct Luz{
 }Luz;
 
 #define ENTER 13
+#define ESC 27

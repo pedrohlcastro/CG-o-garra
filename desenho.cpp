@@ -82,7 +82,7 @@ void desenhaMaquina(float fltSize,Cor corObjeto){
 
     //topo maquina
     glDisable(GL_LIGHTING);
-    //logo na parte da frente...
+    //logo
     glPushMatrix();
         glTranslated(0,5,0);
         glEnable(GL_TEXTURE_2D);
@@ -157,5 +157,6 @@ void desenhaMaquina(float fltSize,Cor corObjeto){
                 glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
     glPopMatrix();
+    
     glEnable(GL_LIGHTING);
 }

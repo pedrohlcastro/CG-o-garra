@@ -1,5 +1,5 @@
 CC=g++
-OPCOES_COMPILADOR=-I. -lSOIL -lGL -lGLU -lglut -lGLEW -lm
+OPCOES_COMPILADOR=-I. -lSOIL -lGL -lGLU -lglut -lGLEW -lsfml-audio -lm
 all:arquivos
 
 arquivos: main.o skybox.o garra.o desenho.o objetos_fundo.o telasControle.o

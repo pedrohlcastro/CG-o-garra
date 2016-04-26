@@ -5,6 +5,7 @@
 #else
     #include <SOIL/SOIL.h>
 #endif
+#include <SFML/Audio.hpp>
 #include <bits/stdc++.h>
 #include "skybox.h"
 #include "estruturas_basicas.h"
@@ -30,6 +31,7 @@ enum Telas{LOADING,MENU,JOGO};
 Telas TelaAtual=LOADING;
 float fltSpriteBegin=0,fltSpriteEnd=1;
 float fltHeight,fltWidth;
+sf::Music musicPrincipal;
 
 static long font = (long)GLUT_BITMAP_8_BY_13;
 
@@ -42,6 +44,14 @@ void Inicializa(){
     intQtdObjetosFundo = setObjetosFundo(1,5);   
     setupLogoDesenhoMaquina();
     setupImagensMenus();
+    #ifdef WIN32
+        musicPrincipal.openFromFile("sounds/som_espacial.ogg");
+    #else
+        musicPrincipal.openFromFile("../sounds/som_espacial.ogg");    
+    #endif
+    musicPrincipal.setLoop(true);
+    musicPrincipal.setVolume(30);
+    musicPrincipal.play();
 }
 
 // Escreve uma cadeia de caracteres
@@ -200,11 +210,6 @@ void Redimensiona(int w, int h){
 void Teclado(unsigned char key, int x, int y){
     if(TelaAtual==JOGO){
         switch (key) {
-            // Tecla ESC
-            case 27:
-                exit(0);
-                break;
-
             case 'a'://camera vira para direita
                 if(crdCamera.fltX<=2.4){
                     crdCamera.fltX +=0.3;
@@ -300,6 +305,9 @@ void Teclado(unsigned char key, int x, int y){
                 //TelaAtual=CREDITOS;
             }
         }
+    }
+    if(key==ESC){
+        exit(0);
     }
 }
 
