@@ -129,13 +129,13 @@ void desenhaSkybox(float fltSize){
         glBegin(GL_QUADS);
             //front face
             glColor4f(1,1,1,1);
-            glTexCoord2f(0,1);
-            glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
             glTexCoord2f(1,1);
+            glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
+            glTexCoord2f(0,1);
             glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
-            glTexCoord2f(1,0);
-            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
             glTexCoord2f(0,0);
+            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
+            glTexCoord2f(1,0);
             glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
         glEnd();
         glDisable(GL_TEXTURE_2D);

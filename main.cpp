@@ -29,6 +29,7 @@ int intIndexObjeto = -1;
 enum Telas{LOADING,MENU,JOGO};
 Telas TelaAtual=LOADING;
 float fltSpriteBegin=0,fltSpriteEnd=1;
+float fltHeight,fltWidth;
 
 void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
@@ -154,7 +155,8 @@ void Redimensiona(int w, int h){
         glLoadIdentity();
         glTranslatef (0.0, 0.0, -5.0);
         gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
-        cout<<(GLsizei)w<<" "<<(GLsizei) h<<endl;
+        fltWidth=w;
+        fltHeight=h;
     }
     else{
         glMatrixMode(GL_PROJECTION);
@@ -168,6 +170,8 @@ void Redimensiona(int w, int h){
         glMatrixMode(GL_PROJECTION);
         glOrtho(-250, 250, -250, 250,-1,1);
         glMatrixMode(GL_MODELVIEW);
+        fltWidth=w;
+        fltHeight=h;
     }
     
 }
@@ -236,10 +240,10 @@ void Teclado(unsigned char key, int x, int y){
         if(key==ENTER){
             if(fltSpriteBegin==0){
                 //carrega modelo de visao 3d para jogo...
-                glViewport (0, 0, 500, 500);
+                glViewport (0, 0, fltWidth, fltHeight);
                 glMatrixMode (GL_PROJECTION);
                 glLoadIdentity();
-                gluPerspective(60.0, 500/500, 1.0, 20.0);
+                gluPerspective(60.0, fltWidth/fltHeight, 1.0, 20.0);
                 glMatrixMode(GL_MODELVIEW);
                 glLoadIdentity();
                 glTranslatef (0.0, 0.0, -5.0);
