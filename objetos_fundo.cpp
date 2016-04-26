@@ -101,7 +101,7 @@ int Colisao(Coordenadas crdEsfera, int intQtd){
 
 void LevantaObjeto(int intIndexObjeto){
     intIndexObjetoColisao = intIndexObjeto;
-    if(objfVetorObjetos[intIndexObjeto].crdObjetosFundo.fltY < 0)
+    if(objfVetorObjetos[intIndexObjeto].crdObjetosFundo.fltY < -1)
         objfVetorObjetos[intIndexObjeto].crdObjetosFundo.fltY++;
 }
 
@@ -116,7 +116,7 @@ void MovimentaObjetoEixoZ(int intIndexObjeto){
 bool DesceObjeto(){
     bool blnRetorno = false;
     objfVetorObjetos[intIndexObjetoColisao].crdObjetosFundo.fltY--;
-    if(objfVetorObjetos[intIndexObjetoColisao].crdObjetosFundo.fltY < -2)
+    if(objfVetorObjetos[intIndexObjetoColisao].crdObjetosFundo.fltY < -3)
         blnRetorno = true;
 
     return blnRetorno;

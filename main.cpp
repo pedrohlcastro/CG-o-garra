@@ -31,6 +31,8 @@ Telas TelaAtual=LOADING;
 float fltSpriteBegin=0,fltSpriteEnd=1;
 float fltHeight,fltWidth;
 
+static long font = (long)GLUT_BITMAP_8_BY_13;
+
 void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel(GL_SMOOTH);
@@ -40,6 +42,12 @@ void Inicializa(){
     intQtdObjetosFundo = setObjetosFundo(1,5);   
     setupLogoDesenhoMaquina();
     setupImagensMenus();
+}
+
+// Escreve uma cadeia de caracteres
+void escreveTextoNaTela(void *font, char *string){
+    char *c;
+    for (c = string; *c != '\0'; c++) glutBitmapCharacter(font, *c);
 }
 
 void Desenha(){
@@ -80,6 +88,14 @@ void Desenha(){
 
             desenhaSkybox(12);
 
+            /*//desenha caracteres na tela
+            glDisable(GL_LIGHTING); // Desabilita iluminação
+            glColor3f(.85f, .85f, .85f);
+            glRasterPos3f(-1.0, 1.10, -2.0);
+            escreveTextoNaTela((void*)font, (char*)"Faltam Pegar X objetos");
+            */
+
+            glEnable(GL_LIGHTING);
             //Cores de luz usadas
             float fltLuzBranca[]={1,1,1,1};
             float fltLuzLaranja[]={1, 0.5 , 0 , 1};
@@ -330,7 +346,7 @@ void Tempo(int value){
     else
         intTempo = 0;
 
-    glutTimerFunc(1000, Tempo, 0);
+    glutTimerFunc(300, Tempo, 0);
 }
 void CameraSutil(int x, int y){
     if(TelaAtual==JOGO){
@@ -391,7 +407,7 @@ int main(int argc, char** argv){
     glutIdleFunc(Update);
     glutPassiveMotionFunc(CameraSutil);
     glutTimerFunc(0, Tempo, 0);
-    glutTimerFunc(100,LoadingTimer,0);
+    glutTimerFunc(5000,LoadingTimer,0);
     glutTimerFunc(0, VerificaColisao, 0);
     glutMainLoop();
     return 0;

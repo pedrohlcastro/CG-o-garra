@@ -87,18 +87,48 @@ void desenhaMaquina(float fltSize,Cor corObjeto){
         glTranslated(0,5,0);
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,intImgLogo);
-            glBegin(GL_QUADS);
-                // front face
-                glColor4f(1,1,1,1);
-                glTexCoord2f(1,1);      
-                glVertex3f(fltSize/2,fltSize/2,fltSize/2);       
-                glTexCoord2f(0,1);    
-                glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-                glTexCoord2f(0,0);
-                glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
-                glTexCoord2f(1,0);
-                glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
-            glEnd();
+        glBegin(GL_QUADS);
+            // front face
+            glColor4f(1,1,1,1);
+            glTexCoord2f(1,1);      
+            glVertex3f(fltSize/2,fltSize/2,fltSize/2);       
+            glTexCoord2f(0,1);    
+            glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
+            glTexCoord2f(0,0);
+            glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
+            glTexCoord2f(1,0);
+            glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
+        glEnd();
+
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,intImgLogo);
+        glBegin(GL_QUADS);
+            //left face
+            glColor4f(1,1,1,1);
+            glTexCoord2f(0,1);
+            glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
+            glTexCoord2f(1,1);
+            glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
+            glTexCoord2f(1,0);
+            glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
+            glTexCoord2f(0,0);
+            glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
+        glEnd();
+
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D,intImgLogo);
+        glBegin(GL_QUADS);
+            //right face
+            glColor4f(1,1,1,1);
+            glTexCoord2f(0,1);
+            glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
+            glTexCoord2f(1,1);
+            glVertex3f(fltSize/2,fltSize/2,fltSize/2);
+            glTexCoord2f(1,0);
+            glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
+            glTexCoord2f(0,0);
+            glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
+        glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_LIGHTING);
@@ -107,24 +137,12 @@ void desenhaMaquina(float fltSize,Cor corObjeto){
     glPushMatrix();
         glTranslated(0,5,0);
         glBegin(GL_QUADS);
-                // left face
-                glColor4f(corObjeto.fltR,corObjeto.fltG,corObjeto.fltB,corObjeto.fltAlfa);
-                glVertex3f(-fltSize/2,fltSize/2,fltSize/2);
-                glVertex3f(-fltSize/2,-fltSize/2,fltSize/2);
-                glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
-                glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
                 // back face
                 glColor4f(corObjeto.fltR,corObjeto.fltG,corObjeto.fltB,corObjeto.fltAlfa);
                 glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
                 glVertex3f(-fltSize/2,fltSize/2,-fltSize/2);
                 glVertex3f(-fltSize/2,-fltSize/2,-fltSize/2);
                 glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
-                // right face
-                glColor4f(corObjeto.fltR,corObjeto.fltG,corObjeto.fltB,corObjeto.fltAlfa);
-                glVertex3f(fltSize/2,fltSize/2,fltSize/2);
-                glVertex3f(fltSize/2,-fltSize/2,fltSize/2);
-                glVertex3f(fltSize/2,-fltSize/2,-fltSize/2);
-                glVertex3f(fltSize/2,fltSize/2,-fltSize/2);
                 // top face
                 glColor4f(corObjeto.fltR,corObjeto.fltG,corObjeto.fltB,corObjeto.fltAlfa);
                 glVertex3f(fltSize/2,fltSize/2,fltSize/2);
