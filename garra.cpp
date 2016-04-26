@@ -62,7 +62,7 @@ void desenhaGarra(Garra grrGarra){
         glTranslatef (1.0 + (intTamanhoDescida/2), 0.0, 0.0);
         glPushMatrix();
             glColor4f(1.0,1.0,1.0,0.0);
-            float fltLuzDif[]={1,1,1,0};
+            float fltLuzDif[]={1, 1, 1, 0};
             float fltLuzEsp[]={1,1,1,0};
             glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzDif);
             glutSolidSphere(0.25,200,200);

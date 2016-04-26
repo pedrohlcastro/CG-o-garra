@@ -92,27 +92,32 @@ void Desenha(){
             glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
 
 
-            //objeto dentro da garra
-            glPushMatrix();
-                glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBranca);
-                desenhaGarra(grrGarra);
-                desenhaObjetosFundo(intQtdObjetosFundo);
-            glPopMatrix();
 
             fltLuzBrancaReflexo[0]=80;
             glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
             glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzLaranja);
             desenhaMaquina(5,corMaquina);
 
+            //objeto dentro da garra
+            glPushMatrix();
+                fltMaterialLiso[0]=60;
+                glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
+                desenhaObjetosFundo(intQtdObjetosFundo);
+                glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBranca);
+                desenhaGarra(grrGarra);
+            glPopMatrix();
+
             // caixa da Garra...
             glPushMatrix();
                 glTranslated(0,0,0);
                 glColor3f(1,1,1);
-                fltLuzBrancaReflexo[0]=128;
+                fltMaterialLiso[0]=128;
                 glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
                 glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBrancaReflexo);
                 glutSolidCube(5);
             glPopMatrix();
+            
+
             glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBranca);
             break;
         }
@@ -197,6 +202,26 @@ void Teclado(unsigned char key, int x, int y){
             case 'd'://camera vira para esquerda
                 if(crdCamera.fltX>=-4.8){
                     crdCamera.fltX -= 0.3;
+                    glMatrixMode(GL_MODELVIEW);
+                    glLoadIdentity();
+                    glTranslatef (0.0, 0.0, -5.0);
+                    gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+                }
+                break;
+
+            case 'w'://camera sobe
+                if(crdCamera.fltY<=1.3){
+                    crdCamera.fltY +=0.3;
+                    glMatrixMode(GL_MODELVIEW);
+                    glLoadIdentity();
+                    glTranslatef (0.0, 0.0, -5.0);
+                    gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+                }
+                break;
+
+            case 's'://camera desce
+                if(crdCamera.fltY>=-0.8){
+                    crdCamera.fltY -= 0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
                     glTranslatef (0.0, 0.0, -5.0);
@@ -307,6 +332,33 @@ void Tempo(int value){
 
     glutTimerFunc(1000, Tempo, 0);
 }
+void CameraSutil(int x, int y){
+    if(TelaAtual==JOGO){
+        if(x>(fltWidth-100)){
+            crdCamera.fltX =0.9;
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glTranslatef (0.0, 0.0, -5.0);
+            gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);        
+        }
+        else{
+            if(x<100){
+                crdCamera.fltX =-0.9;
+                glMatrixMode(GL_MODELVIEW);
+                glLoadIdentity();
+                glTranslatef (0.0, 0.0, -5.0);
+                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);              
+            }
+            else{
+                crdCamera.fltX =0;
+                glMatrixMode(GL_MODELVIEW);
+                glLoadIdentity();
+                glTranslatef (0.0, 0.0, -5.0);
+                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);        
+            }
+        }
+    }
+}
 
 void VerificaColisao(int value){
     int intRetorno;
@@ -337,8 +389,9 @@ int main(int argc, char** argv){
     glutKeyboardFunc(Teclado);
     glutSpecialFunc(MovimentaGarra);
     glutIdleFunc(Update);
+    glutPassiveMotionFunc(CameraSutil);
     glutTimerFunc(0, Tempo, 0);
-    glutTimerFunc(5000,LoadingTimer,0);
+    glutTimerFunc(100,LoadingTimer,0);
     glutTimerFunc(0, VerificaColisao, 0);
     glutMainLoop();
     return 0;
