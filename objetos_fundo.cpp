@@ -81,7 +81,7 @@ void desenhaObjetosFundo(int intQtd){
 	}
 }
 
-int Colisao(Coordenadas crdEsfera, int intQtd){
+int Colisao(Coordenadas crdEsfera, int intQtd,int *intQtdPedente){
 
     float fltDistancia;
     float fltRaio = 0.4;

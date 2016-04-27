@@ -1,0 +1,1 @@
+void DesenhaParte2D(int intTempo,Coordenadas crdCamera,int intQtdPedente);

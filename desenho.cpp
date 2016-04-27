@@ -160,3 +160,9 @@ void desenhaMaquina(float fltSize,Cor corObjeto){
     
     glEnable(GL_LIGHTING);
 }
+
+
+
+
+
+

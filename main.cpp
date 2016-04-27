@@ -13,6 +13,7 @@
 #include "desenho.h"
 #include "objetos_fundo.h"
 #include "telasControle.h"
+#include "funcoes2D.h"
 
 using namespace std;
 
@@ -27,11 +28,13 @@ bool blnMovimentacaoHabilidata = true;
 int intQtdObjetosFundo;
 int intIndexObjeto = -1;
 
-enum Telas{LOADING,MENU,JOGO};
+enum Telas{LOADING,MENU,JOGO,GAMEOVER,GANHOU};
 Telas TelaAtual=LOADING;
 float fltSpriteBegin=0,fltSpriteEnd=1;
 float fltHeight,fltWidth;
 sf::Music musicPrincipal;
+int intTimer=0;
+int intQtdPedente=5;
 
 static long font = (long)GLUT_BITMAP_8_BY_13;
 
@@ -39,7 +42,6 @@ void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel(GL_SMOOTH);
     
-
     //carrega objetos fundo...
     intQtdObjetosFundo = setObjetosFundo(1,5);   
     setupLogoDesenhoMaquina();
@@ -54,12 +56,6 @@ void Inicializa(){
     musicPrincipal.play();
 }
 
-// Escreve uma cadeia de caracteres
-void escreveTextoNaTela(void *font, char *string){
-    char *c;
-    for (c = string; *c != '\0'; c++) glutBitmapCharacter(font, *c);
-}
-
 void Desenha(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable (GL_BLEND);
@@ -69,6 +65,9 @@ void Desenha(){
     
     switch(TelaAtual){
         case JOGO:{
+
+            glEnable(GL_DEPTH_TEST);
+
             float luzPosition[]={0, 0, 0, 1};
 
             //luz no centro do topo da maquina...
@@ -97,13 +96,6 @@ void Desenha(){
             glEnable(GL_LIGHT0);
 
             desenhaSkybox(12);
-
-            /*//desenha caracteres na tela
-            glDisable(GL_LIGHTING); // Desabilita iluminação
-            glColor3f(.85f, .85f, .85f);
-            glRasterPos3f(-1.0, 1.10, -2.0);
-            escreveTextoNaTela((void*)font, (char*)"Faltam Pegar X objetos");
-            */
 
             glEnable(GL_LIGHTING);
             //Cores de luz usadas
@@ -141,10 +133,11 @@ void Desenha(){
                 glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
                 glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBrancaReflexo);
                 glutSolidCube(5);
-            glPopMatrix();
-            
-
+            glPopMatrix();           
             glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBranca);
+
+            DesenhaParte2D(intTimer,crdCamera,intQtdPedente);
+            
             break;
         }
 
@@ -205,6 +198,16 @@ void Redimensiona(int w, int h){
         fltHeight=h;
     }
     
+}
+
+void timerTempo(int value){
+    intTimer++;
+    if(intTimer==60){
+        TelaAtual=GAMEOVER;
+    }
+    else{
+        glutTimerFunc(1000,timerTempo,0);
+    }
 }
 
 void Teclado(unsigned char key, int x, int y){
@@ -298,6 +301,9 @@ void Teclado(unsigned char key, int x, int y){
                 glLoadIdentity();
                 glTranslatef (0.0, 0.0, -5.0);
                 gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+                intTimer=0;
+                intQtdPedente=5;
+                glutTimerFunc(0,timerTempo,0);
                 TelaAtual=JOGO;
             }
             else{
@@ -344,6 +350,7 @@ void MovimentaGarra(int key, int x, int y){
 
 void Update(){
     glutPostRedisplay();
+    //teste de win e lose...
 }
 
 void Tempo(int value){
@@ -386,9 +393,10 @@ void CameraSutil(int x, int y){
 
 void VerificaColisao(int value){
     int intRetorno;
-    intRetorno = Colisao(GetCoordenadaEsfera(), intQtdObjetosFundo);
-    if(intRetorno != -1)
+    intRetorno = Colisao(GetCoordenadaEsfera(), intQtdObjetosFundo,&intQtdPedente);
+    if(intRetorno != -1){
         intIndexObjeto = intRetorno;
+    }
     glutTimerFunc(0, VerificaColisao, 0);
 }
 
@@ -415,7 +423,7 @@ int main(int argc, char** argv){
     glutIdleFunc(Update);
     glutPassiveMotionFunc(CameraSutil);
     glutTimerFunc(0, Tempo, 0);
-    glutTimerFunc(5000,LoadingTimer,0);
+    glutTimerFunc(3500,LoadingTimer,0);
     glutTimerFunc(0, VerificaColisao, 0);
     glutMainLoop();
     return 0;
