@@ -1,16 +1,16 @@
 IMPLEMENTADAS:
 	Animação de Fechamento: 8%
 	Cenario em arquivo +-: 2.5%
-	Camera Lateral +-: 5%
+	Camera Lateral +-: 5% vai ficar assim
 	skybox:4%
 	menus: 5%
 	Tema espacial...: 2%
 	multiplataforma
 
 METAS PARA IMPLEMENTAÇÃO:
-	MUSICA 5% -->PEDRO
-	LUZ PONTAL: 5% --perguntar  --PEDRO
-	2d in 3d : 5% ---talvez     --PEDRO
+	MUSICA 5% -->PEDRO    OK
+	LUZ PONTAL: 5% --perguntar  --PEDRO talvez OK
+	2d in 3d : 5% ---talvez     --PEDRO  OK
 	camera top-down: 6%     --GUSTAVO
 	cheat : 3%      --GUSTAVO
 	varios-tipos: 7%  --GUSTAVO

@@ -228,7 +228,7 @@ void Teclado(unsigned char key, int x, int y){
     if(TelaAtual==JOGO){
         switch (key) {
             case 'a'://camera vira para direita
-                if(crdCamera.fltX<=2.4){
+                if(crdCamera.fltX<=1.5){
                     crdCamera.fltX +=0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
@@ -238,7 +238,7 @@ void Teclado(unsigned char key, int x, int y){
                 break;
 
             case 'd'://camera vira para esquerda
-                if(crdCamera.fltX>=-4.8){
+                if(crdCamera.fltX>=-1.5){
                     crdCamera.fltX -= 0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
@@ -248,22 +248,25 @@ void Teclado(unsigned char key, int x, int y){
                 break;
 
             case 'w'://camera sobe
-                if(crdCamera.fltY<=1.3){
+                if(crdCamera.fltY<=1){
                     crdCamera.fltY +=0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
                     glTranslatef (0.0, 0.0, -5.0);
                     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+                    cout<<crdCamera.fltY<<endl;
                 }
                 break;
 
             case 's'://camera desce
-                if(crdCamera.fltY>=-0.8){
+                if(crdCamera.fltY>=-0.2){
                     crdCamera.fltY -= 0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
                     glTranslatef (0.0, 0.0, -5.0);
                     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+                    cout<<crdCamera.fltY<<endl;
+
                 }
                 break;
 
