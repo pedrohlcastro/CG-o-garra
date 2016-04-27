@@ -68,10 +68,12 @@ void Desenha(){
 
             glEnable(GL_DEPTH_TEST);
 
+            //fonte de luz Posicional           
             float luzPosition[]={0, 0, 0, 1};
+            float solPosition[]={-1, 0, 1, 0};
 
             //luz no centro do topo da maquina...
-            float fltLuzAmb[] = { 1.0, 1.0, 1.0, 1.0 };
+            float fltLuzAmb[] = { 0, 0, 0, 0 };
             float fltLuzDif[] = { 1.0, 1.0, 1.0, 1.0 };
             float fltLuzSpec[] = { 1, 1, 1, 1.0 };
             float fltLuzGlobal[]={ 0.5, 0.5, 0.5, 0 };
@@ -82,19 +84,31 @@ void Desenha(){
             glLightfv(GL_LIGHT0, GL_SPECULAR, fltLuzSpec);
             glLightModelfv(GL_LIGHT_MODEL_AMBIENT, fltLuzGlobal);
 
+            //propriedadas da "lampada" e de luz Global
+            glLightfv(GL_LIGHT1, GL_AMBIENT, fltLuzAmb);
+            glLightfv(GL_LIGHT1, GL_DIFFUSE, fltLuzDif);
+            glLightfv(GL_LIGHT1, GL_SPECULAR, fltLuzSpec);
+
+
             // Desanhando a lampada 0...
             glDisable(GL_LIGHTING);
             glPushMatrix();
                 glLightfv(GL_LIGHT0, GL_POSITION, luzPosition);
                 glTranslatef(0, 3, 0);
                 glColor3f(0.5, 0.5, 0.5);
-                glutWireSphere(0.5, 8, 8);
             glPopMatrix();
+
+            glPushMatrix();
+                glLightfv(GL_LIGHT1, GL_POSITION, solPosition);
+                glTranslatef(-10, -10, 0);
+                glColor3f(1, 1, 1);
+            glPopMatrix();
+
 
             //desenhando cena
             glEnable(GL_LIGHTING);
             glEnable(GL_LIGHT0);
-
+            glEnable(GL_LIGHT1);
             desenhaSkybox(12);
 
             glEnable(GL_LIGHTING);
@@ -202,7 +216,7 @@ void Redimensiona(int w, int h){
 
 void timerTempo(int value){
     intTimer++;
-    if(intTimer==60){
+    if(intTimer==30){
         TelaAtual=GAMEOVER;
     }
     else{
@@ -411,7 +425,7 @@ int main(int argc, char** argv){
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize (500, 500);
     glutInitWindowPosition (100, 100);
-    glutCreateWindow ("O GARRA");
+    glutCreateWindow ("O GARRA MISSAO ESPACIAL");
     setupTexturasSkybox();
     glutReshapeFunc(Redimensiona);
     Inicializa();
