@@ -15,8 +15,6 @@ enum intTextura{FUNDO=0,LADO1,LADO2,CHAO,TETO};
 GLint intSkybox[5];
 
 void setupTexturasSkybox(){
-
-
     intSkybox[FUNDO] = SOIL_load_OGL_texture(
         #ifdef WIN32
             "img/centro.png",
@@ -93,6 +91,8 @@ void desenhaSkybox(float fltSize){
     glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP);
     glPushMatrix();
         glBindTexture(GL_TEXTURE_2D,intSkybox[FUNDO]);
         glBegin(GL_QUADS);

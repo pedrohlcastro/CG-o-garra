@@ -35,6 +35,7 @@ float fltHeight,fltWidth;
 sf::Music musicPrincipal;
 int intTimer=0;
 int intQtdPedente=5;
+bool blnVisaoPanoramica=false;
 
 static long font = (long)GLUT_BITMAP_8_BY_13;
 
@@ -178,6 +179,32 @@ void Desenha(){
             desenhaTelasControle(IMG_MENU,fltSpriteBegin,fltSpriteEnd);
             break;
         }
+
+        case GAMEOVER:{
+            //carrega modelo de visao 2d
+            glDisable(GL_DEPTH_TEST);
+            glDisable(GL_LIGHTING);
+            glMatrixMode (GL_PROJECTION);
+            glLoadIdentity ();
+            gluOrtho2D (-250, 250, -250, 250);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            desenhaTelasControle(IMG_LOSE,fltSpriteBegin,fltSpriteEnd);
+            break;
+        }
+
+        case GANHOU:{
+            //carrega modelo de visao 2d
+            glDisable(GL_DEPTH_TEST);
+            glDisable(GL_LIGHTING);
+            glMatrixMode (GL_PROJECTION);
+            glLoadIdentity ();
+            gluOrtho2D (-250, 250, -250, 250);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            desenhaTelasControle(IMG_WIN,fltSpriteBegin,fltSpriteEnd);
+            break;
+        }
     }
 
     glutSwapBuffers();
@@ -208,6 +235,7 @@ void Redimensiona(int w, int h){
         glMatrixMode(GL_PROJECTION);
         glOrtho(-250, 250, -250, 250,-1,1);
         glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
         fltWidth=w;
         fltHeight=h;
     }
@@ -228,7 +256,7 @@ void Teclado(unsigned char key, int x, int y){
     if(TelaAtual==JOGO){
         switch (key) {
             case 'a'://camera vira para direita
-                if(crdCamera.fltX<=1.5){
+                if(crdCamera.fltX<=1.5 && !blnVisaoPanoramica){
                     crdCamera.fltX +=0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
@@ -238,7 +266,7 @@ void Teclado(unsigned char key, int x, int y){
                 break;
 
             case 'd'://camera vira para esquerda
-                if(crdCamera.fltX>=-1.5){
+                if(crdCamera.fltX>=-1.5 && !blnVisaoPanoramica){
                     crdCamera.fltX -= 0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
@@ -248,26 +276,37 @@ void Teclado(unsigned char key, int x, int y){
                 break;
 
             case 'w'://camera sobe
-                if(crdCamera.fltY<=1){
+                if(crdCamera.fltY<=1 && !blnVisaoPanoramica){
                     crdCamera.fltY +=0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
                     glTranslatef (0.0, 0.0, -5.0);
                     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
-                    cout<<crdCamera.fltY<<endl;
                 }
                 break;
 
             case 's'://camera desce
-                if(crdCamera.fltY>=-0.2){
+                if(crdCamera.fltY>=-0.2 && !blnVisaoPanoramica){
                     crdCamera.fltY -= 0.3;
                     glMatrixMode(GL_MODELVIEW);
                     glLoadIdentity();
                     glTranslatef (0.0, 0.0, -5.0);
                     gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
-                    cout<<crdCamera.fltY<<endl;
-
                 }
+                break;
+
+            case 'p'://visao panoramica
+                crdCamera.fltX=0;
+                crdCamera.fltY=1;
+                if(crdCamera.fltZ==8){
+                    crdCamera.fltZ=3;
+                    blnVisaoPanoramica=false;
+                }
+                else{
+                    crdCamera.fltZ=8;
+                    blnVisaoPanoramica=true;
+                }
+                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
                 break;
 
             case 'x'://garra fecha
@@ -297,9 +336,6 @@ void Teclado(unsigned char key, int x, int y){
                 IniciarMovimentacaoAutomatico();
                 blnMovimentacaoHabilidata = false;
                 break;
-
-            default:
-                break;
         }
     }
     if(TelaAtual==MENU){
@@ -321,12 +357,37 @@ void Teclado(unsigned char key, int x, int y){
                 intTimer=0;
                 intQtdPedente=5;
                 glutTimerFunc(0,timerTempo,0);
+                fltSpriteBegin=0;
+                fltSpriteEnd=1;
                 TelaAtual=JOGO;
             }
             else{
                 //code
                 //TelaAtual=CREDITOS;
             }
+        }
+    }
+    if(TelaAtual==GAMEOVER || TelaAtual==GANHOU){
+        if(key=='r' || key=='R'){
+            //carrega modelo de visao 3d para jogo...
+            glViewport (0, 0, fltWidth, fltHeight);
+            glMatrixMode (GL_PROJECTION);
+            glLoadIdentity();
+            gluPerspective(60.0, fltWidth/fltHeight, 1.0, 20.0);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glTranslatef (0.0, 0.0, -5.0);
+            gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glTranslatef (0.0, 0.0, -5.0);
+            gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
+            intTimer=0;
+            intQtdPedente=5;
+            glutTimerFunc(0,timerTempo,0);
+            fltSpriteBegin=0;
+            fltSpriteEnd=1;
+            TelaAtual=JOGO;
         }
     }
     if(key==ESC){
@@ -367,7 +428,9 @@ void MovimentaGarra(int key, int x, int y){
 
 void Update(){
     glutPostRedisplay();
-    //teste de win e lose...
+    if(intQtdPedente==0 && blnMovimentacaoHabilidata){
+        TelaAtual=GANHOU;
+    }
 }
 
 void Tempo(int value){

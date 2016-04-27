@@ -6,6 +6,7 @@ IMPLEMENTADAS:
 	menus: 5%
 	Tema espacial...: 2%
 	multiplataforma
+	visaoPanoramica
 
 METAS PARA IMPLEMENTAÇÃO:
 	MUSICA 5% -->PEDRO    OK
