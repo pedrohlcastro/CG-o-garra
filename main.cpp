@@ -36,6 +36,7 @@ sf::Music musicPrincipal;
 int intTimer=0;
 int intQtdPedente=5;
 bool blnVisaoPanoramica=false;
+bool blnColidiuPrimeiraVez=false;
 
 static long font = (long)GLUT_BITMAP_8_BY_13;
 
@@ -439,9 +440,10 @@ void Tempo(int value){
         grrGarra = MovimentaGarra(grrGarra, intIndexObjeto);
         blnMovimentacaoHabilidata = HabilitarMovimento();
     }
-    else
+    else{
         intTempo = 0;
-
+        blnColidiuPrimeiraVez=false;
+    }
     glutTimerFunc(300, Tempo, 0);
 }
 void CameraSutil(int x, int y){
@@ -475,9 +477,15 @@ void CameraSutil(int x, int y){
 void VerificaColisao(int value){
     int intRetorno;
     intRetorno = Colisao(GetCoordenadaEsfera(), intQtdObjetosFundo,&intQtdPedente);
-    if(intRetorno != -1){
+    if(intRetorno != 15){
         intIndexObjeto = intRetorno;
+        if(!blnColidiuPrimeiraVez){
+            intQtdPedente--;
+            blnColidiuPrimeiraVez=true;
+        }
     }
+    if(intRetorno==15)
+        intIndexObjeto=-1;
     glutTimerFunc(0, VerificaColisao, 0);
 }
 

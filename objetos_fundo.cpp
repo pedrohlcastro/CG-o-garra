@@ -14,7 +14,7 @@
 using namespace std;
 
 objetosFundo objfVetorObjetos[1000];
-int intIndexObjetoColisao;
+int intIndexObjetoColisao=-1;
 
 int setObjetosFundo(int intFase,float fltAreaCaixaVidro){
 	FILE * fileCordenadas;
