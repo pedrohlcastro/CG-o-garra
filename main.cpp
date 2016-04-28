@@ -42,11 +42,12 @@ static long font = (long)GLUT_BITMAP_8_BY_13;
 void Inicializa(){
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel(GL_SMOOTH);
-    
+
+    //carrega skybox
+    setupTexturasSkybox();
     //carrega objetos fundo...
     intQtdObjetosFundo = setObjetosFundo(1,5);   
     setupLogoDesenhoMaquina();
-    setupImagensMenus();
     #ifdef WIN32
         musicPrincipal.openFromFile("sounds/som_espacial.ogg");
     #else
@@ -444,7 +445,7 @@ void Tempo(int value){
     glutTimerFunc(300, Tempo, 0);
 }
 void CameraSutil(int x, int y){
-    if(TelaAtual==JOGO){
+    if(TelaAtual==JOGO && !blnVisaoPanoramica){
         if(x>(fltWidth-100)){
             crdCamera.fltX =0.9;
             glMatrixMode(GL_MODELVIEW);
@@ -492,17 +493,15 @@ int main(int argc, char** argv){
     glutInitWindowSize (500, 500);
     glutInitWindowPosition (100, 100);
     glutCreateWindow ("O GARRA MISSAO ESPACIAL");
-    setupTexturasSkybox();
     glutReshapeFunc(Redimensiona);
-    Inicializa();
+    setupImagensMenus();
     glutDisplayFunc(Desenha);
-
-
     glutKeyboardFunc(Teclado);
     glutSpecialFunc(MovimentaGarra);
     glutIdleFunc(Update);
     glutPassiveMotionFunc(CameraSutil);
     glutTimerFunc(0, Tempo, 0);
+    Inicializa();
     glutTimerFunc(3500,LoadingTimer,0);
     glutTimerFunc(0, VerificaColisao, 0);
     glutMainLoop();
