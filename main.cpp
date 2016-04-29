@@ -246,7 +246,7 @@ void Redimensiona(int w, int h){
 
 void timerTempo(int value){
     intTimer++;
-    if(intTimer==30){
+    if(intTimer==48){
         TelaAtual=GAMEOVER;
     }
     else{
