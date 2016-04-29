@@ -14,7 +14,7 @@
 using namespace std;
 
 
-int intImagens[4];
+int intImagens[5];
 
 void setupImagensMenus(){
     intImagens[IMG_LOADING]= SOIL_load_OGL_texture(
@@ -68,6 +68,19 @@ void setupImagensMenus(){
         SOIL_FLAG_INVERT_Y
     );
     if (intImagens[IMG_LOSE] == 0 ) {
+        printf("Erro carregando textura: '%s'\n", SOIL_last_result());
+    }
+    intImagens[IMG_CREDITOS]= SOIL_load_OGL_texture(
+        #ifdef WIN32
+            "img/PERDER.png",
+        #else
+            "../img/PERDEU.png",
+        #endif
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_INVERT_Y
+    );
+    if (intImagens[IMG_CREDITOS] == 0 ) {
         printf("Erro carregando textura: '%s'\n", SOIL_last_result());
     }
 }

@@ -28,15 +28,16 @@ bool blnMovimentacaoHabilidata = true;
 int intQtdObjetosFundo;
 int intIndexObjeto = -1;
 
-enum Telas{LOADING,MENU,JOGO,GAMEOVER,GANHOU};
+enum Telas{LOADING,MENU,JOGO,GAMEOVER,GANHOU,CREDITOS};
 Telas TelaAtual=LOADING;
 float fltSpriteBegin=0,fltSpriteEnd=1;
 float fltHeight,fltWidth;
-sf::Music musicPrincipal;
+sf::Music musicPrincipal,musicInsertCoin,musicPegouObjeto,musicWin,musicGameOver;
 int intTimer=0;
 int intQtdPedente=5;
 bool blnVisaoPanoramica=false;
 bool blnColidiuPrimeiraVez=false;
+bool blnTocouMusicaGanhou=false;
 
 static long font = (long)GLUT_BITMAP_8_BY_13;
 
@@ -49,11 +50,38 @@ void Inicializa(){
     //carrega objetos fundo...
     intQtdObjetosFundo = setObjetosFundo(1,5);   
     setupLogoDesenhoMaquina();
+
+    //carrega musicas
     #ifdef WIN32
         musicPrincipal.openFromFile("sounds/som_espacial.ogg");
     #else
         musicPrincipal.openFromFile("../sounds/som_espacial.ogg");    
     #endif
+
+    #ifdef WIN32
+        musicInsertCoin.openFromFile("sounds/insert_coin.ogg");
+    #else
+        musicInsertCoin.openFromFile("../sounds/insert_coin.ogg");    
+    #endif
+
+    #ifdef WIN32
+        musicPegouObjeto.openFromFile("sounds/pick_coin.ogg");
+    #else
+        musicPegouObjeto.openFromFile("../sounds/pick_coin.ogg");    
+    #endif
+
+    #ifdef WIN32
+        musicWin.openFromFile("sounds/u_win.ogg");
+    #else
+        musicWin.openFromFile("../sounds/u_win.ogg");    
+    #endif
+
+    #ifdef WIN32
+        musicGameOver.openFromFile("sounds/gameover.ogg");
+    #else
+        musicGameOver.openFromFile("../sounds/gameover.ogg");    
+    #endif
+
     musicPrincipal.setLoop(true);
     musicPrincipal.setVolume(30);
     musicPrincipal.play();
@@ -176,9 +204,20 @@ void Desenha(){
             glDisable(GL_DEPTH_TEST);
             glDisable(GL_LIGHTING);
             glMatrixMode (GL_PROJECTION);
-            glLoadIdentity ();
+            glLoadIdentity();
             gluOrtho2D (-250, 250, -250, 250);
             desenhaTelasControle(IMG_MENU,fltSpriteBegin,fltSpriteEnd);
+            break;
+        }
+
+        case CREDITOS:{
+            //carrega modelo de visao 2d
+            glDisable(GL_DEPTH_TEST);
+            glDisable(GL_LIGHTING);
+            glMatrixMode (GL_PROJECTION);
+            glLoadIdentity();
+            gluOrtho2D (-250, 250, -250, 250);
+            desenhaTelasControle(IMG_CREDITOS,fltSpriteBegin,fltSpriteEnd);
             break;
         }
 
@@ -246,11 +285,13 @@ void Redimensiona(int w, int h){
 
 void timerTempo(int value){
     intTimer++;
-    if(intTimer==48){
+    if(intTimer==48 && intQtdPedente!=0){
         TelaAtual=GAMEOVER;
+        musicGameOver.play();
     }
     else{
-        glutTimerFunc(1000,timerTempo,0);
+        if(TelaAtual==JOGO)
+            glutTimerFunc(1000,timerTempo,0);
     }
 }
 
@@ -362,15 +403,19 @@ void Teclado(unsigned char key, int x, int y){
                 fltSpriteBegin=0;
                 fltSpriteEnd=1;
                 TelaAtual=JOGO;
+                blnTocouMusicaGanhou=false;
+                musicInsertCoin.play();
             }
             else{
                 //code
-                //TelaAtual=CREDITOS;
+                fltSpriteBegin=0;
+                fltSpriteEnd=1;
+                TelaAtual=CREDITOS;
             }
         }
     }
     if(TelaAtual==GAMEOVER || TelaAtual==GANHOU){
-        if(key=='r' || key=='R'){
+        if((key=='r' || key=='R') && blnMovimentacaoHabilidata){
             //carrega modelo de visao 3d para jogo...
             glViewport (0, 0, fltWidth, fltHeight);
             glMatrixMode (GL_PROJECTION);
@@ -389,7 +434,18 @@ void Teclado(unsigned char key, int x, int y){
             glutTimerFunc(0,timerTempo,0);
             fltSpriteBegin=0;
             fltSpriteEnd=1;
+            //carrega objetos fundo...
+            intQtdObjetosFundo = setObjetosFundo(1,5); 
             TelaAtual=JOGO;
+            blnTocouMusicaGanhou=false;
+            musicInsertCoin.play();
+        }
+    }
+    if(TelaAtual==CREDITOS){
+        if(key=='b' || key=='B'){
+            fltSpriteBegin=0;
+            fltSpriteEnd=0.5;
+            TelaAtual=MENU;
         }
     }
     if(key==ESC){
@@ -430,8 +486,12 @@ void MovimentaGarra(int key, int x, int y){
 
 void Update(){
     glutPostRedisplay();
-    if(intQtdPedente==0 && blnMovimentacaoHabilidata){
+    if(intQtdPedente==0 && blnMovimentacaoHabilidata && intTimer!=48){
         TelaAtual=GANHOU;
+        if(!blnTocouMusicaGanhou){
+            musicWin.play();
+            blnTocouMusicaGanhou=true;
+        }
     }
 }
 
@@ -481,6 +541,7 @@ void VerificaColisao(int value){
         intIndexObjeto = intRetorno;
         if(!blnColidiuPrimeiraVez){
             intQtdPedente--;
+            musicPegouObjeto.play();
             blnColidiuPrimeiraVez=true;
         }
     }
