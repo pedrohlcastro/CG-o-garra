@@ -72,9 +72,9 @@ void setupImagensMenus(){
     }
     intImagens[IMG_CREDITOS]= SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/PERDER.png",
+            "img/CREDITOS.png",
         #else
-            "../img/PERDEU.png",
+            "../img/CREDITOS.png",
         #endif
         SOIL_LOAD_AUTO,
         SOIL_CREATE_NEW_ID,
