@@ -1,21 +1,24 @@
 # depslib dependency file v1.0
-1461524821 source:c:\tp\tp2\trunk\main.cpp
+1462026983 source:c:\tp\tp2\trunk\main.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
 	<SOIL/SOIL.h>
+	<SFML/Audio.hpp>
 	<bits/stdc++.h>
 	"skybox.h"
 	"estruturas_basicas.h"
 	"garra.h"
 	"desenho.h"
 	"objetos_fundo.h"
+	"telasControle.h"
+	"funcoes2D.h"
 
 1461280380 c:\tp\tp2\trunk\skybox.h
 
-1461520137 c:\tp\tp2\trunk\estruturas_basicas.h
+1462026980 c:\tp\tp2\trunk\estruturas_basicas.h
 
-1461520137 source:c:\tp\tp2\trunk\skybox.cpp
+1462026983 source:c:\tp\tp2\trunk\skybox.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
@@ -24,7 +27,7 @@
 	"skybox.h"
 	"estruturas_basicas.h"
 
-1461523558 source:c:\tp\tp2\trunk\garra.cpp
+1462026980 source:c:\tp\tp2\trunk\garra.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
@@ -35,9 +38,9 @@
 
 1461520671 c:\tp\tp2\trunk\garra.h
 
-1461520694 c:\tp\tp2\trunk\desenho.h
+1462026980 c:\tp\tp2\trunk\desenho.h
 
-1461343271 source:c:\tp\tp2\trunk\desenho.cpp
+1462026980 source:c:\tp\tp2\trunk\desenho.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
@@ -45,9 +48,9 @@
 	<bits/stdc++.h>
 	"estruturas_basicas.h"
 
-1461524924 c:\tp\tp2\trunk\objetos_fundo.h
+1462026983 c:\tp\tp2\trunk\objetos_fundo.h
 
-1461523801 source:c:\tp\tp2\trunk\objetos_fundo.cpp
+1462026983 source:c:\tp\tp2\trunk\objetos_fundo.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
@@ -58,4 +61,468 @@
 	"objetos_fundo.h"
 	<time.h>
 	<math.h>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Err.hpp>
+	<SFML/System/FileInputStream.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Lock.hpp>
+	<SFML/System/MemoryInputStream.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Sleep.hpp>
+	<SFML/System/String.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Utf.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+
+1441976890 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\config.hpp
+	"TargetConditionals.h"
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\clock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\export.hpp
+	<SFML/Config.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\time.hpp
+	<SFML/System/Export.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\err.hpp
+	<SFML/System/Export.hpp>
+	<ostream>
+
+1436034025 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\fileinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdio>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\inputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\noncopyable.hpp
+	<SFML/System/Export.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\lock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\memoryinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Export.hpp>
+	<cstdlib>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\mutex.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\sleep.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\string.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Utf.hpp>
+	<locale>
+	<string>
+	<SFML/System/String.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\utf.hpp
+	<SFML/Config.hpp>
+	<algorithm>
+	<locale>
+	<string>
+	<cstdlib>
+	<SFML/System/Utf.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\utf.inl
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\string.inl
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\thread.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+	<SFML/System/Thread.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\thread.inl
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\threadlocal.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\threadlocalptr.hpp
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\threadlocalptr.inl
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\vector2.inl
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\system\vector3.inl
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1436034025 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1436034025 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundfilefactory.inl
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml-2.3.2\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1462026983 c:\tp\tp2\trunk\telascontrole.h
+
+1462026980 c:\tp\tp2\trunk\funcoes2d.h
+
+1462029324 source:c:\tp\tp2\trunk\telascontrole.cpp
+	<GL/glew.h>
+	<GL/freeglut.h>
+	<SOIL.h>
+	<SOIL/SOIL.h>
+	<bits/stdc++.h>
+	"estruturas_basicas.h"
+	"telasControle.h"
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Err.hpp>
+	<SFML/System/FileInputStream.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Lock.hpp>
+	<SFML/System/MemoryInputStream.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Sleep.hpp>
+	<SFML/System/String.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Utf.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+
+1441976890 c:\tp\tp2\trunk\sfml\include\sfml\config.hpp
+	"TargetConditionals.h"
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\clock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\export.hpp
+	<SFML/Config.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\time.hpp
+	<SFML/System/Export.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\err.hpp
+	<SFML/System/Export.hpp>
+	<ostream>
+
+1436034025 c:\tp\tp2\trunk\sfml\include\sfml\system\fileinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdio>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\inputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Export.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\noncopyable.hpp
+	<SFML/System/Export.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\lock.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\memoryinputstream.hpp
+	<SFML/Config.hpp>
+	<SFML/System/InputStream.hpp>
+	<SFML/System/Export.hpp>
+	<cstdlib>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\mutex.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\sleep.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Time.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\string.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/Utf.hpp>
+	<locale>
+	<string>
+	<SFML/System/String.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\utf.hpp
+	<SFML/Config.hpp>
+	<algorithm>
+	<locale>
+	<string>
+	<cstdlib>
+	<SFML/System/Utf.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\utf.inl
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\string.inl
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\thread.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+	<SFML/System/Thread.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\thread.inl
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\threadlocal.hpp
+	<SFML/System/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<cstdlib>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\threadlocalptr.hpp
+	<SFML/System/ThreadLocal.hpp>
+	<SFML/System/ThreadLocalPtr.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\threadlocalptr.inl
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\vector2.inl
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\system\vector3.inl
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1436034025 c:\tp\tp2\trunk\sfml\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1436034025 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundfilefactory.inl
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1429780453 c:\tp\tp2\trunk\sfml\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1462026980 source:c:\tp\tp2\trunk\funcoes2d.cpp
+	<GL/glew.h>
+	<GL/freeglut.h>
+	<SOIL.h>
+	<SOIL/SOIL.h>
+	<SFML/Audio.hpp>
+	<bits/stdc++.h>
+	"estruturas_basicas.h"
 

@@ -28,7 +28,7 @@ void setupImagensMenus(){
         SOIL_FLAG_INVERT_Y
     );
     if (intImagens[IMG_LOADING] == 0 ) {
-        printf("Erro carregando textura: '%s'\n", SOIL_last_result());
+        printf("Erro carregando textura a: '%s'\n", SOIL_last_result());
     }
 
     intImagens[IMG_MENU]= SOIL_load_OGL_texture(
@@ -59,7 +59,7 @@ void setupImagensMenus(){
     }
     intImagens[IMG_LOSE]= SOIL_load_OGL_texture(
         #ifdef WIN32
-            "img/PERDER.png",
+            "img/PERDEU.png",
         #else
             "../img/PERDEU.png",
         #endif
@@ -95,7 +95,7 @@ void desenhaTelasControle(int intEscolha,float spriteBegin,float spriteEnd){
 			glTexCoord2f(spriteBegin, 0); 					glVertex2f(0,0);
 			glTexCoord2f(spriteEnd, 0);						glVertex2f(500,0);
   			glTexCoord2f(spriteEnd, 1); 					glVertex2f(500,500);
-  			glTexCoord2f(spriteBegin, 1);					glVertex2f(0,500);			
+  			glTexCoord2f(spriteBegin, 1);					glVertex2f(0,500);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
