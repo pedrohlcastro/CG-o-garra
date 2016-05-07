@@ -27,7 +27,7 @@
 	"skybox.h"
 	"estruturas_basicas.h"
 
-1462647380 source:c:\tp\tp2\trunk\garra.cpp
+1462649455 source:c:\tp\tp2\trunk\garra.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>
@@ -50,7 +50,7 @@
 
 1462646070 c:\tp\tp2\trunk\objetos_fundo.h
 
-1462647619 source:c:\tp\tp2\trunk\objetos_fundo.cpp
+1462652676 source:c:\tp\tp2\trunk\objetos_fundo.cpp
 	<GL/glew.h>
 	<GL/freeglut.h>
 	<SOIL.h>

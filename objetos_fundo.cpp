@@ -16,6 +16,13 @@ using namespace std;
 objetosFundo objfVetorObjetos[1000];
 int intIndexObjetoColisao=-1;
 
+void setBuraco(int intIndex){
+    objfVetorObjetos[intIndex].crdObjetosFundo.fltX = -1.99;
+    objfVetorObjetos[intIndex].crdObjetosFundo.fltY = -2.99;
+    objfVetorObjetos[intIndex].crdObjetosFundo.fltZ = -2;
+    objfVetorObjetos[intIndex].intTipo = CUBO;
+    objfVetorObjetos[intIndex].fltTamanhoObjeto = 1;
+}
 //Cria os objetos baseado em informacoes contidas em um arquivo texto
 int setObjetosFundo(int intFase, float fltAreaCaixaVidro){
 	FILE * fileCordenadas;
@@ -34,6 +41,7 @@ int setObjetosFundo(int intFase, float fltAreaCaixaVidro){
 			cout<<"ERRO ABRIR ARQUIVO"<<endl;
 
 		fscanf(fileCordenadas,"%d",&intTam);
+
 		for(intAuxiliar = 0 ;intAuxiliar < intTam ; intAuxiliar++){
 			fscanf(fileCordenadas,"%f",&fltAuxiliar);
 			objfVetorObjetos[intAuxiliar].crdObjetosFundo.fltX = fltAuxiliar;
@@ -55,18 +63,20 @@ int setObjetosFundo(int intFase, float fltAreaCaixaVidro){
         fclose(fileCordenadas);
 	}
 
+	setBuraco(intTam);
+
 	return intTam; //retorna a quantidade de objetos criados
 }
 
 void desenhaObjetosFundo(int intQtd){
 	//cor provisoria
-	float fltX = 1, fltY = 1;
+	Coordenadas crdCor = {1,1,1};
 	int intAuxiliar;
 
-	for(intAuxiliar = 0; intAuxiliar < intQtd ; intAuxiliar++){
+	for(intAuxiliar = 0; intAuxiliar < intQtd +1 ; intAuxiliar++){
 		glPushMatrix();
-			glColor3f(fltX,fltY,1);
-			float corDif[] = {fltX, fltY, 1, 1};
+			glColor3f(crdCor.fltX,crdCor.fltY,crdCor.fltZ);
+			float corDif[] = {crdCor.fltX, crdCor.fltY, crdCor.fltZ, 1};
 			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, corDif);
         	glTranslatef(objfVetorObjetos[intAuxiliar].crdObjetosFundo.fltX, objfVetorObjetos[intAuxiliar].crdObjetosFundo.fltY, objfVetorObjetos[intAuxiliar].crdObjetosFundo.fltZ);
         	if(objfVetorObjetos[intAuxiliar].intTipo==CUBO)
@@ -74,11 +84,15 @@ void desenhaObjetosFundo(int intQtd){
         	if(objfVetorObjetos[intAuxiliar].intTipo==ESFERA)
         		glutSolidSphere(objfVetorObjetos[intAuxiliar].fltTamanhoObjeto,100,100);
 		glPopMatrix();
-
-		if(intAuxiliar%2==0)
-			fltX-=0.2;
+        if(intAuxiliar == intQtd - 1){
+            crdCor.fltX = 0;
+            crdCor.fltY = 0;
+            crdCor.fltZ = 0;
+        }
+		else if(intAuxiliar%2==0)
+			crdCor.fltX-=0.2;
 		else
-			fltY-=0.2;
+			crdCor.fltY-=0.2;
 	}
 }
 //Funcao que determina a colisao entre os objetos e a garra. Quando acontece a colisao, a funcao retorna o index do objeto. Caso contrario, retorna -1
