@@ -17,7 +17,10 @@ Coordenadas crdGarrasEsquerdaDireita = {0.7, -0.09, 0.4};
 Coordenadas crdGarrasInferiorSuperior = {0.7, 0.4, 0.0};
 Coordenadas crdTamanhoGarra = {0.6, 0.2, 0.2};
 Coordenadas crdTamanhoSuporte = {1.0, 1.0, 1.0};
+Coordenadas crdEsfera;
+float fltTamanhoDescida = 0, fltRaioEsfera = 0.25;
 
+//Variaveis booleanas do movimento automatico da garra
 bool blnDescer = false;
 bool blnSubir = false;
 bool blnMovimentoEixoZ = false;
@@ -27,20 +30,48 @@ bool blnFechar = false;
 bool blnAbrir = false;
 bool blnDescidaObjeto = false;
 
-float intTamanhoDescida = 0;
+//Funcoes GET
+Coordenadas GetCoordenadaEsfera(){
+    return crdEsfera;
+}
 
-Coordenadas crdEsfera;
+float GetRaioEsfera(){
+    return fltRaioEsfera;
+}
+
+//Retorna o valor das variaveis booleanas para o estado inicial.
+void RetornaVariaveisValorInicial(){
+    blnMovimentando = true;
+    blnDescer = false;
+    blnSubir = false;
+    blnMovimentoEixoZ = false;
+    blnMovimentoEixoX = false;
+    blnFechar = false;
+    blnAbrir = false;
+    blnDescidaObjeto = false;
+}
 
 void AtualizaCoordenadaEsfera(Coordenadas crdGarra){
     crdEsfera.fltX = crdGarra.fltX;
     crdEsfera.fltY = crdGarra.fltY;
     crdEsfera.fltZ = crdGarra.fltZ;
 
-    crdEsfera.fltY -= 2.0 + (intTamanhoDescida/2);
+    crdEsfera.fltY -= 2.0 + (fltTamanhoDescida/2);
 }
 
+//Procedimento de desenho das falanges
+void desenhaFalange(){
+    glPushMatrix();
+        glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
+        glutWireCube (0.8);
+    glPopMatrix();
+}
+
+//Procedimento de desenho da garra
 void desenhaGarra(Garra grrGarra){
     //Garra
+    float fltLuzDif[] = {1, 1, 1, 0};
+    float fltLuzEsp[] = {1, 1, 1, 0};
     glColor3f(1.0,1.0,1.0);
     glPushMatrix();
         glTranslatef (grrGarra.crdGarra.fltX, grrGarra.crdGarra.fltY, grrGarra.crdGarra.fltZ);
@@ -55,117 +86,78 @@ void desenhaGarra(Garra grrGarra){
         glRotatef ((GLfloat) anguloSuporte, 0.0, 0.0, 1.0);
         glTranslatef (1.0, 0.0, 0.0);
         glPushMatrix();
-            glScalef (crdTamanhoSuporte.fltX + (intTamanhoDescida), crdTamanhoSuporte.fltY, crdTamanhoSuporte.fltZ);
+            glScalef (crdTamanhoSuporte.fltX + (fltTamanhoDescida), crdTamanhoSuporte.fltY, crdTamanhoSuporte.fltZ);
             glutSolidCube (1.0);
         glPopMatrix();
         //Esfera
-        glTranslatef (1.0 + (intTamanhoDescida/2), 0.0, 0.0);
+        glTranslatef (1.0 + (fltTamanhoDescida/2), 0.0, 0.0);
         glPushMatrix();
             glColor4f(1.0,1.0,1.0,0.0);
-            float fltLuzDif[]={1, 1, 1, 0};
-            float fltLuzEsp[]={1,1,1,0};
             glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzDif);
-            glutSolidSphere(0.25,200,200);
+            glutSolidSphere(fltRaioEsfera, 200, 200);
         glPopMatrix();
         fltLuzDif[0]=1; fltLuzDif[1]=1; fltLuzDif[2]=1; fltLuzDif[3]=1;
         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzDif);
-        glTranslatef (-(1.0 + (intTamanhoDescida/2)), 0.0, 0.0);
+        glTranslatef (-(1.0 + (fltTamanhoDescida/2)), 0.0, 0.0);
         glColor3f(1.0,1.0,1.0);
 
         //Garra Direita
         glColor3f(1.0,1.0,1.0);
         glPushMatrix();
-            glTranslatef (crdGarrasEsquerdaDireita.fltX + (intTamanhoDescida/2), crdGarrasEsquerdaDireita.fltY, crdGarrasEsquerdaDireita.fltZ);
+            glTranslatef (crdGarrasEsquerdaDireita.fltX + (fltTamanhoDescida/2), crdGarrasEsquerdaDireita.fltY, crdGarrasEsquerdaDireita.fltZ);
 
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
 
             glTranslatef (0.5, 0.0, 0.0);
             glRotatef ((GLfloat) grrGarra.intDireita, 0.0, 1.0, 0.0);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
 
             glTranslatef (0.5, 0.0, 0.0);
             glRotatef ((GLfloat) grrGarra.intDireita, 0.0, 1.0, 0.0);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
         glPopMatrix();
-
 
         //Garra Superior
         glPushMatrix();
-            glTranslatef (crdGarrasInferiorSuperior.fltX + (intTamanhoDescida/2), crdGarrasInferiorSuperior.fltY, crdGarrasInferiorSuperior.fltZ);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            glTranslatef (crdGarrasInferiorSuperior.fltX + (fltTamanhoDescida/2), crdGarrasInferiorSuperior.fltY, crdGarrasInferiorSuperior.fltZ);
+            desenhaFalange();
 
             glTranslatef (0.5, 0.0, 0.0);
             glRotatef ((GLfloat) grrGarra.intSuperior * -1, 0.0, 0.0, 1.0);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
 
             glTranslatef (0.5, 0.0, 0.0);
             glRotatef ((GLfloat) grrGarra.intSuperior * -1, 0.0, 0.0, 1.0);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
         glPopMatrix();
 
         //Garra Inferior
         glPushMatrix();
-            glTranslatef (crdGarrasInferiorSuperior.fltX + (intTamanhoDescida/2), -crdGarrasInferiorSuperior.fltY, crdGarrasInferiorSuperior.fltZ);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            glTranslatef (crdGarrasInferiorSuperior.fltX + (fltTamanhoDescida/2), -crdGarrasInferiorSuperior.fltY, crdGarrasInferiorSuperior.fltZ);
+            desenhaFalange();
 
             glTranslatef (0.5, 0.0, 0.0);
             glRotatef ((GLfloat) grrGarra.intInferior, 0.0, 0.0, 1.0);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
 
             glTranslatef (0.5, 0.0, 0.0);
             glRotatef ((GLfloat) grrGarra.intInferior, 0.0, 0.0, 1.0);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
         glPopMatrix();
 
 
         //Garra Esquerda
         glPushMatrix();
-            glTranslatef (crdGarrasEsquerdaDireita.fltX + (intTamanhoDescida/2), crdGarrasEsquerdaDireita.fltY, -crdGarrasEsquerdaDireita.fltZ);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            glTranslatef (crdGarrasEsquerdaDireita.fltX + (fltTamanhoDescida/2), crdGarrasEsquerdaDireita.fltY, -crdGarrasEsquerdaDireita.fltZ);
+            desenhaFalange();
 
             glTranslatef (0.5, 0.0, 0.0);
             glRotatef ((GLfloat) grrGarra.intEsquerda * -1, 0.0, 1.0, 0.0);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
 
             glTranslatef (0.5, 0.0, 0.0);
             glRotatef ((GLfloat) grrGarra.intEsquerda * -1, 0.0, 1.0, 0.0);
-            glPushMatrix();
-                glScalef (crdTamanhoGarra.fltX, crdTamanhoGarra.fltY, crdTamanhoGarra.fltZ);
-                glutWireCube (0.8);
-            glPopMatrix();
+            desenhaFalange();
         glPopMatrix();
 
     glPopMatrix();
@@ -173,34 +165,22 @@ void desenhaGarra(Garra grrGarra){
     AtualizaCoordenadaEsfera(grrGarra.crdGarra);
 }
 
+//Funcoes de movimentacao
+//Destrava a movimentacao da garra para o usuario
 bool HabilitarMovimento(){
     if(blnDescer && blnSubir && blnMovimentoEixoZ && blnMovimentoEixoX && blnFechar && blnAbrir && blnDescidaObjeto){
+        RetornaVariaveisValorInicial();
         blnMovimentando = false;
-        blnDescer = false;
-        blnSubir = false;
-        blnMovimentoEixoZ = false;
-        blnMovimentoEixoX = false;
-        blnFechar = false;
-        blnAbrir = false;
-        blnDescidaObjeto = false;
     }
 
     return !blnMovimentando;
-
 }
 
 void IniciarMovimentacaoAutomatico(){
-    blnMovimentando = true;
-    blnDescer = false;
-    blnSubir = false;
-    blnMovimentoEixoZ = false;
-    blnMovimentoEixoX = false;
-    blnFechar = false;
-    blnAbrir = false;
-    blnDescidaObjeto = false;
+    RetornaVariaveisValorInicial();
 }
 
-
+//Funcao que realiza o movimento automatico da garra
 Garra MovimentaGarra(Garra grrGarra, int intIndexObjeto){
     if(grrGarra.crdGarra.fltX == -2)
         blnMovimentoEixoX = true;
@@ -208,12 +188,11 @@ Garra MovimentaGarra(Garra grrGarra, int intIndexObjeto){
         blnMovimentoEixoZ = true;
     if (grrGarra.intDireita == 30)
         blnFechar = true;
-    if(!blnDescer && intTamanhoDescida == 3)
+    if(!blnDescer && fltTamanhoDescida == 3)
         blnDescer = true;
 
-
     if(!blnDescer)
-        intTamanhoDescida++;
+        fltTamanhoDescida++;
     else if(!blnFechar){
         grrGarra.intDireita = (grrGarra.intDireita + 5) % 360;
         grrGarra.intEsquerda = ((grrGarra.intEsquerda + 5) % 360);
@@ -221,7 +200,7 @@ Garra MovimentaGarra(Garra grrGarra, int intIndexObjeto){
         grrGarra.intSuperior = (grrGarra.intSuperior + 5) % 360;
     }
     else if(!blnSubir){
-        intTamanhoDescida--;
+        fltTamanhoDescida--;
         if(intIndexObjeto != -1)
             LevantaObjeto(intIndexObjeto);
     }
@@ -241,18 +220,13 @@ Garra MovimentaGarra(Garra grrGarra, int intIndexObjeto){
         grrGarra.intInferior = (grrGarra.intInferior - 5) % 360;
         grrGarra.intSuperior = (grrGarra.intSuperior - 5) % 360;
     }
-    else{
+    else
         blnDescidaObjeto = DesceObjeto();
-    }
 
-
-    if(blnFechar && intTamanhoDescida == 0)
+    if(blnFechar && fltTamanhoDescida == 0)
         blnSubir = true;
     if (blnDescer && grrGarra.intDireita == 0)
         blnAbrir = true;
-    return grrGarra;
-}
 
-Coordenadas GetCoordenadaEsfera(){
-    return crdEsfera;
+    return grrGarra;
 }

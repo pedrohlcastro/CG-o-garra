@@ -48,38 +48,38 @@ void Inicializa(){
     //carrega skybox
     setupTexturasSkybox();
     //carrega objetos fundo...
-    intQtdObjetosFundo = setObjetosFundo(1,5);   
+    intQtdObjetosFundo = setObjetosFundo(1,5);
     setupLogoDesenhoMaquina();
 
     //carrega musicas
     #ifdef WIN32
         musicPrincipal.openFromFile("sounds/som_espacial.ogg");
     #else
-        musicPrincipal.openFromFile("../sounds/som_espacial.ogg");    
+        musicPrincipal.openFromFile("../sounds/som_espacial.ogg");
     #endif
 
     #ifdef WIN32
         musicInsertCoin.openFromFile("sounds/insert_coin.ogg");
     #else
-        musicInsertCoin.openFromFile("../sounds/insert_coin.ogg");    
+        musicInsertCoin.openFromFile("../sounds/insert_coin.ogg");
     #endif
 
     #ifdef WIN32
         musicPegouObjeto.openFromFile("sounds/pick_coin.ogg");
     #else
-        musicPegouObjeto.openFromFile("../sounds/pick_coin.ogg");    
+        musicPegouObjeto.openFromFile("../sounds/pick_coin.ogg");
     #endif
 
     #ifdef WIN32
         musicWin.openFromFile("sounds/u_win.ogg");
     #else
-        musicWin.openFromFile("../sounds/u_win.ogg");    
+        musicWin.openFromFile("../sounds/u_win.ogg");
     #endif
 
     #ifdef WIN32
         musicGameOver.openFromFile("sounds/gameover.ogg");
     #else
-        musicGameOver.openFromFile("../sounds/gameover.ogg");    
+        musicGameOver.openFromFile("../sounds/gameover.ogg");
     #endif
 
     musicPrincipal.setLoop(true);
@@ -93,13 +93,13 @@ void Desenha(){
     glEnable(GL_LIGHTING);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
-    
+
     switch(TelaAtual){
         case JOGO:{
 
             glEnable(GL_DEPTH_TEST);
 
-            //fonte de luz Posicional           
+            //fonte de luz Posicional
             float luzPosition[]={0, 0, 0, 1};
             float solPosition[]={-1, 0, 1, 0};
 
@@ -178,11 +178,11 @@ void Desenha(){
                 glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,fltMaterialLiso );
                 glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBrancaReflexo);
                 glutSolidCube(5);
-            glPopMatrix();           
+            glPopMatrix();
             glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, fltLuzBranca);
 
             DesenhaParte2D(intTimer,crdCamera,intQtdPedente);
-            
+
             break;
         }
 
@@ -280,7 +280,7 @@ void Redimensiona(int w, int h){
         fltWidth=w;
         fltHeight=h;
     }
-    
+
 }
 
 void timerTempo(int value){
@@ -435,7 +435,7 @@ void Teclado(unsigned char key, int x, int y){
             fltSpriteBegin=0;
             fltSpriteEnd=1;
             //carrega objetos fundo...
-            intQtdObjetosFundo = setObjetosFundo(1,5); 
+            intQtdObjetosFundo = setObjetosFundo(1,5);
             TelaAtual=JOGO;
             blnTocouMusicaGanhou=false;
             musicInsertCoin.play();
@@ -513,7 +513,7 @@ void CameraSutil(int x, int y){
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
             glTranslatef (0.0, 0.0, -5.0);
-            gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);        
+            gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
         }
         else{
             if(x<100){
@@ -521,14 +521,14 @@ void CameraSutil(int x, int y){
                 glMatrixMode(GL_MODELVIEW);
                 glLoadIdentity();
                 glTranslatef (0.0, 0.0, -5.0);
-                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);              
+                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
             }
             else{
                 crdCamera.fltX =0;
                 glMatrixMode(GL_MODELVIEW);
                 glLoadIdentity();
                 glTranslatef (0.0, 0.0, -5.0);
-                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);        
+                gluLookAt(crdCamera.fltX, crdCamera.fltY, crdCamera.fltZ, 0, 0, 0, 0, 1, 0);
             }
         }
     }
@@ -536,7 +536,7 @@ void CameraSutil(int x, int y){
 
 void VerificaColisao(int value){
     int intRetorno;
-    intRetorno = Colisao(GetCoordenadaEsfera(), intQtdObjetosFundo,&intQtdPedente);
+    intRetorno = Colisao(GetCoordenadaEsfera(), intQtdObjetosFundo, &intQtdPedente, GetRaioEsfera());
     if(intRetorno != 15){
         intIndexObjeto = intRetorno;
         if(!blnColidiuPrimeiraVez){

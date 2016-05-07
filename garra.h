@@ -3,3 +3,4 @@ void IniciarMovimentacaoAutomatico();
 bool HabilitarMovimento();
 Garra MovimentaGarra(Garra, int);
 Coordenadas GetCoordenadaEsfera();
+float GetRaioEsfera();
