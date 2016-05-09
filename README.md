@@ -59,12 +59,12 @@ PARA RODAR O JOGO EM WINDOWS BASTA SEGUIR OS SEGUINTE PASSOS:
 
 <h2>COMO JOGAR:</h2>
 FUNCIONALIDADES:
-	USE <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd> NO TECLADO PARA SE NAVEGAR NOS MENUS.
-	USE <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd> PARA MOVER A GARRA E <kbd>Backspace</kbd> PARA TENTAR PEGAR ALGUM OBJETO.
-	USE <kbd>A</kbd><kbd>W</kbd><kbd>D</kbd><kbd>S</kbd> PARA MOVER A CAMERA
-	USE <kbd>Z</kbd><kbd>X</kbd> PARA ABRIR E FECHAR A GARRA
-	O MOUSE PODE SER USADO PARA MOVIMENTAR SUTILMETE A CAMERA
-	<kbd>ESC</kbd> PARA SAIR DO JOGO
+	<p>USE <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd> NO TECLADO PARA SE NAVEGAR NOS MENUS.</p>
+	<p>USE <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd> PARA MOVER A GARRA E <kbd>Backspace</kbd> PARA TENTAR PEGAR <p>ALGUM OBJETO.</p>
+	<p>USE <kbd>A</kbd><kbd>W</kbd><kbd>D</kbd><kbd>S</kbd> PARA MOVER A CAMERA</p>
+	<p>USE <kbd>Z</kbd><kbd>X</kbd> PARA ABRIR E FECHAR A GARRA</p>
+	<p>O MOUSE PODE SER USADO PARA MOVIMENTAR SUTILMETE A CAMERA</p>
+	<p><kbd>ESC</kbd> PARA SAIR DO JOGO</p>
 
 <h2>CREDITOS:</h2>
 FEITO POR GUSTAVO MARQUES E PEDRO HENRIQUE LOPES PARA A DISCIPLINA DE COMPUTAÇÃO GRÁFICA 2016/01.
