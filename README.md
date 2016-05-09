@@ -60,7 +60,7 @@ PARA RODAR O JOGO EM WINDOWS BASTA SEGUIR OS SEGUINTE PASSOS:
 <h2>COMO JOGAR:</h2>
 FUNCIONALIDADES:
 	<p>USE <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd> NO TECLADO PARA SE NAVEGAR NOS MENUS.</p>
-	<p>USE <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd> PARA MOVER A GARRA E <kbd>Backspace</kbd> PARA TENTAR PEGAR <p>ALGUM OBJETO.</p>
+	<p>USE <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd> PARA MOVER A GARRA E <kbd>Backspace</kbd> PARA TENTAR PEGAR</p>
 	<p>USE <kbd>A</kbd><kbd>W</kbd><kbd>D</kbd><kbd>S</kbd> PARA MOVER A CAMERA</p>
 	<p>USE <kbd>Z</kbd><kbd>X</kbd> PARA ABRIR E FECHAR A GARRA</p>
 	<p>O MOUSE PODE SER USADO PARA MOVIMENTAR SUTILMETE A CAMERA</p>
