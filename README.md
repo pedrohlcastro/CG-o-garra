@@ -1,5 +1,8 @@
 # CG-o-garra
-TP02 Computação Gráfica 2016/01 CEFET-MG
+TP02 Computação Gráfica 2016/01 CEFET-MG</br></br>
+Durante uma missão espacial SUPER-SECRETA da NASA um grupo de astronautas foram atacados por Aliens na Lua...
+O suprimento de Oxigênio deles esta acabando e a única esperança é conseguir as 5 capsulas faltantes no macabro jogo inventado pelos Aliens: O garra, mas como os Aliens queriam demostrar sua superioridade utilizaram uma mão de um astronauta como garra e limitaram o tempo de uso da garra...
+SEU OBJETIVO É SIMPLES SALVE OS ASTRONAUTAS.
 
 <h2>SISTEMAS SUPORTADOS: WINDOWS E LINUX</h2>
 
@@ -69,3 +72,4 @@ FUNCIONALIDADES:
 <h2>CREDITOS:</h2>
 FEITO POR GUSTAVO MARQUES E PEDRO HENRIQUE LOPES PARA A DISCIPLINA DE COMPUTAÇÃO GRÁFICA 2016/01.
 ALGUMAS IMAGENS E MÚSICAS FORAM RETIRADAS DO GOOGLE.
+DEMO: https://youtu.be/VJ-Rr7Vf_N8
